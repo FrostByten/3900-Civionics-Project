@@ -1,0 +1,110 @@
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\3900 Civionics.dll.config
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\3900 Civionics.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\3900 Civionics.pdb
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Antlr3.Runtime.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\EntityFramework.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\EntityFramework.SqlServer.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.AspNet.Identity.Core.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.AspNet.Identity.Owin.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Host.SystemWeb.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Cookies.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Facebook.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Google.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.OAuth.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Twitter.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Web.Infrastructure.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Newtonsoft.Json.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Owin.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Helpers.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Mvc.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Optimization.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Razor.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.WebPages.Deployment.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.WebPages.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.WebPages.Razor.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\WebGrease.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Helpers.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Mvc.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Optimization.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.Razor.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.WebPages.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.WebPages.Deployment.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\System.Web.WebPages.Razor.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Newtonsoft.Json.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Antlr3.Runtime.pdb
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\EntityFramework.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\EntityFramework.SqlServer.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.AspNet.Identity.Core.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.AspNet.Identity.Owin.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Host.SystemWeb.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Facebook.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Cookies.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.OAuth.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Google.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.Twitter.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\obj\Debug\3900 Civionics.csprojResolveAssemblyReference.cache
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\obj\Debug\3900 Civionics.dll
+c:\users\lewis\documents\visual studio 2013\Projects\3900 Civionics\3900 Civionics\obj\Debug\3900 Civionics.pdb
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\3900 Civionics.dll.config
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\3900 Civionics.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\3900 Civionics.pdb
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Antlr3.Runtime.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.SqlServer.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Newtonsoft.Json.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Owin.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Helpers.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Mvc.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Optimization.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Razor.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Razor.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\WebGrease.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Helpers.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Mvc.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Optimization.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Razor.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Razor.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Newtonsoft.Json.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Antlr3.Runtime.pdb
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.SqlServer.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.csprojResolveAssemblyReference.cache
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.dll
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.pdb

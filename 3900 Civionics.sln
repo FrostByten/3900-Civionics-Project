@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3900 Civionics", "3900 Civionics\3900 Civionics.csproj", "{6F63151F-0683-4B9E-8DF5-358BB5795A01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3900 Civionics", "3900 Civionics\3900 Civionics.csproj", "{98C43642-2ADB-4201-AE63-47E3E92C4B7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6F63151F-0683-4B9E-8DF5-358BB5795A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6F63151F-0683-4B9E-8DF5-358BB5795A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6F63151F-0683-4B9E-8DF5-358BB5795A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6F63151F-0683-4B9E-8DF5-358BB5795A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98C43642-2ADB-4201-AE63-47E3E92C4B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98C43642-2ADB-4201-AE63-47E3E92C4B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C43642-2ADB-4201-AE63-47E3E92C4B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98C43642-2ADB-4201-AE63-47E3E92C4B7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
