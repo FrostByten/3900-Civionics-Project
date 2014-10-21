@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace _3900_Civionics.Models
 {
     public class Project
     {
+        [Key]
         public int ID { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [Display(Name = "Date Added")]
         public DateTime DateAdded { get; set; }
 
     }
@@ -22,7 +27,9 @@ namespace _3900_Civionics.Models
 
     public class ProjectAccess
     {
+        [Key]
         public int ProjectID { get; set; }
+
         public string UserName { get; set; }
     }
 

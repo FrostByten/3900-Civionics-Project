@@ -49,7 +49,7 @@ namespace _3900_Civionics.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal("~/Project/Index");
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace _3900_Civionics.Controllers
                 if (result.Succeeded)
                 {
                     //await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Project");
                 }
                 else
                 {
@@ -290,7 +290,7 @@ namespace _3900_Civionics.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

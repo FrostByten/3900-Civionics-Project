@@ -13,11 +13,38 @@ namespace _3900_Civionics.Controllers
     public class ProjectController : Controller
     {
         private ProjectDBContext db = new ProjectDBContext();
+        private ProjectAccessDBContext dbaccess = new ProjectAccessDBContext();
 
         // GET: /Project/
         public ActionResult Index()
         {
-            return View(db.Projects.ToList());
+            List<Project> o = new List<Project>();
+            List<Project> list = db.Projects.ToList();
+            List<ProjectAccess> access = dbaccess.ProjectAccessList.ToList();
+
+            System.Diagnostics.Debug.WriteLine("\n\n\nAccessing user permissions...\n\n");
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                if(User.Identity.Name == "admin")
+                {
+                    o.Add(list[i]);
+                    continue;
+                }
+                else
+                {
+                    for (int j = 0; j < access.Count; j++)
+                    {
+                        if ((list[i].ID == access[j].ProjectID) && (access[j].UserName == User.Identity.Name))
+                        {
+                            o.Add(list[i]);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return View(o);
         }
 
         // GET: /Project/Details/5
@@ -50,7 +77,7 @@ namespace _3900_Civionics.Controllers
         {
             if (ModelState.IsValid)
             {
-                project.DateAdded = DateTime.Today;
+                project.DateAdded = DateTime.Now;
                 db.Projects.Add(project);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -110,6 +137,16 @@ namespace _3900_Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            List<ProjectAccess> access = dbaccess.ProjectAccessList.ToList();
+
+            for(int i = 0; i < access.Count; i++)
+            {
+                if(access[i].ProjectID == id)
+                {
+                    dbaccess.ProjectAccessList.Remove(access[i]);
+                }
+            }
+
             Project project = db.Projects.Find(id);
             db.Projects.Remove(project);
             db.SaveChanges();
