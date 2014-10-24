@@ -18,6 +18,7 @@ namespace _3900_Civionics.Models
         [Display(Name = "Date Added")]
         public DateTime DateAdded { get; set; }
 
+        public virtual ICollection<Sensor> Sensors { get; set; }
     }
 
     public class ProjectDBContext : DbContext
