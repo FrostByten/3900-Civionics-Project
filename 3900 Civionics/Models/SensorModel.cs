@@ -13,6 +13,8 @@ namespace _3900_Civionics.Models
         public string Type { get; set; }
         public string Location { get; set; }
         public string UnitOfMeasure { get; set; }
+        public int MinSafeReading { get; set; }
+        public int MaxSafeReading { get; set; }
 
         public virtual Project Project { get; set; }
         public virtual ICollection<Reading> Readings { get; set; }
