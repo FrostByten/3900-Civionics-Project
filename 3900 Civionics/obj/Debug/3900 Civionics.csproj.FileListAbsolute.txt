@@ -163,3 +163,62 @@ C:\Users\Sanders\Downloads\3900-Civionics-Project\3900 Civionics\bin\Microsoft.O
 C:\Users\Sanders\Downloads\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.csprojResolveAssemblyReference.cache
 C:\Users\Sanders\Downloads\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.dll
 C:\Users\Sanders\Downloads\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.pdb
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\3900 Civionics.dll.config
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\3900 Civionics.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\3900 Civionics.pdb
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Antlr3.Runtime.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.SqlServer.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Newtonsoft.Json.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Owin.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Helpers.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Mvc.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Optimization.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Razor.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Razor.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\WebGrease.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\EntityFramework.SqlServer.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Helpers.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Mvc.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Optimization.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.Razor.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\System.Web.WebPages.Razor.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Newtonsoft.Json.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Antlr3.Runtime.pdb
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.csprojResolveAssemblyReference.cache
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.dll
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.pdb
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.SensorDB.resources
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.csproj.GenerateResource.Cache
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.ProjectDBMigration.resources
+C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.InitialCreate.resources
