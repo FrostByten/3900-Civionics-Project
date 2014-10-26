@@ -4,6 +4,16 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace _3900_Civionics.DAL
 {
+    /// <summary>
+    /// Description:
+    ///     Coordinates Entity Framework functionality for the sensor data model.
+    ///     Each DbSet is a table and each entity in the set is a row in the table.
+    /// 
+    /// Data Members:
+    ///     DbSet<Project> Projects
+    ///     DbSet<Sensor> Sensors
+    ///     DbSet<Reading> Readings
+    /// </summary>
     public class SensorContext : DbContext
     {
         public SensorContext() : base("SensorContext")
