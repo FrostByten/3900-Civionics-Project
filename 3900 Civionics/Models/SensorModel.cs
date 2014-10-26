@@ -5,6 +5,23 @@ using System.Web;
 
 namespace _3900_Civionics.Models
 {
+    /// <summary>
+    /// Description:
+    ///     Represents the Sensor table,
+    ///     which holds information on the sensors themselves
+    /// 
+    /// Data Members:
+    ///     int SensorID
+    ///     int ProjectID
+    ///     string Name
+    ///     string Type
+    ///     string Location
+    ///     string UnitOfMeasure
+    ///     int MinSafeReading
+    ///     int MaxSafeReading
+    ///     Project Project
+    ///     ICollection Readings
+    /// </summary>
     public class Sensor
     {
         public int SensorID { get; set; }
