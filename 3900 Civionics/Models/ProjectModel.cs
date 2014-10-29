@@ -51,14 +51,16 @@ namespace _3900_Civionics.Models
     ///     which controls user permissions to projects
     /// 
     /// Data Members:
+    ///     int ProjectAccessID
     ///     int ProjectID
     ///     string UserName
     /// </summary>
     public class ProjectAccess
     {
         [Key]
-        public int ProjectID { get; set; }
+        public int ProjectAccessID { get; set; }
 
+        public int ProjectID { get; set; }
         public string UserName { get; set; }
     }
 

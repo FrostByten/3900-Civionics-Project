@@ -37,6 +37,7 @@ namespace _3900_Civionics.Controllers
                     {
                         if ((list[i].ID == access[j].ProjectID) && (access[j].UserName == User.Identity.Name))
                         {
+                            System.Diagnostics.Debug.WriteLine(User.Identity.Name + " is being sent project " + list[i].ID + " via project access " + access[j].ProjectAccessID);
                             o.Add(list[i]);
                             break;
                         }

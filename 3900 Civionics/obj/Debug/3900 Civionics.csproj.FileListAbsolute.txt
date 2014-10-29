@@ -222,3 +222,7 @@ C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\
 C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.csproj.GenerateResource.Cache
 C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.ProjectDBMigration.resources
 C:\Users\Isaac\Documents\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.InitialCreate.resources
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.InitialCreate.resources
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.SensorDB.resources
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\_3900_Civionics.Migrations.ProjectDBMigration.resources
+C:\Users\Lewis\GitHub\3900-Civionics-Project\3900 Civionics\obj\Debug\3900 Civionics.csproj.GenerateResource.Cache
