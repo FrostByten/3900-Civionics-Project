@@ -7,6 +7,8 @@ namespace Civionics.Migrations
     {
         public override void Up()
         {
+            Down();
+
             CreateTable(
                 "dbo.ProjectAccess",
                 c => new
