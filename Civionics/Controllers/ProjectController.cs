@@ -20,11 +20,11 @@ namespace Civionics.Controllers
         {
             if (User.Identity.Name == "admin")
             {
-                return View(db.Projects.ToList());
+                return View(db.Projects.OrderByDescending(k => k.Status));
             }
             else
             {
-                return View(db.Projects.Where(k=>db.ProjectAccesses.Any(j=>j.ProjectID==k.ID && j.UserName == User.Identity.Name)).ToList());
+                return View(db.Projects.Where(k=>db.ProjectAccesses.Any(j=>j.ProjectID==k.ID && j.UserName == User.Identity.Name)).OrderByDescending(k => k.Status));
             }
         }
 
@@ -76,20 +76,9 @@ namespace Civionics.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            List<ProjectAccess> palist = db.ProjectAccesses.ToList();
-            List<ProjectAccess> o = new List<ProjectAccess>();
-
-            for (int i = 0; i < palist.Count; i++)
-            {
-                if (palist.ElementAt(i).ProjectID == id)
-                {
-                    o.Add(palist.ElementAt(i));
-                }
-            }
-
             ViewData.Add("projectid", id);
 
-            return View(o);
+            return View(db.ProjectAccesses.Where(k=>k.ProjectID == id));
         }
 
         // POST: /Project/Edit/5
@@ -128,18 +117,10 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            List<ProjectAccess> access = db.ProjectAccesses.ToList();
+            db.ProjectAccesses.RemoveRange(db.ProjectAccesses.Where(k => k.ProjectID == id));
+            db.Sensors.RemoveRange(db.Sensors.Where(k => k.ProjectID == id));
+            db.Projects.Remove(db.Projects.Find(id));
 
-            for (int i = 0; i < access.Count; i++)
-            {
-                if (access[i].ProjectID == id)
-                {
-                    db.ProjectAccesses.Remove(access[i]);
-                }
-            }
-
-            Project project = db.Projects.Find(id);
-            db.Projects.Remove(project);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -164,15 +145,8 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAccessConfirmed(int id)
         {
-            List<ProjectAccess> access = db.ProjectAccesses.ToList();
+            db.ProjectAccesses.RemoveRange(db.ProjectAccesses.Where(k => k.ProjectAccessID == id));
 
-            for (int i = 0; i < access.Count; i++)
-            {
-                if (access[i].ProjectAccessID == id)
-                {
-                    db.ProjectAccesses.Remove(access[i]);
-                }
-            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -23,9 +23,8 @@ namespace Civionics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            List<Sensor> s = db.Sensors.Where(k=>k.ProjectID==id).ToList();
 
-            return View(s.OrderByDescending(k=>k.Status).ToList());
+            return View(db.Sensors.Where(k => k.ProjectID == id).OrderByDescending(k => k.Status));
         }
 	}
 }

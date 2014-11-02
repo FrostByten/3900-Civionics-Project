@@ -14,6 +14,7 @@ namespace Civionics.Controllers
         {
             var path = "/Images/" + id + ".png";
             System.Diagnostics.Debug.WriteLine(path);
+
             return base.File(path, "image/png");
         }
     }
