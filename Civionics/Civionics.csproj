@@ -242,6 +242,8 @@
     <Content Include="Views\Project\Chart.cshtml" />
     <Content Include="Views\Project\Table.cshtml" />
     <Content Include="Views\Sensor\List.cshtml" />
+    <Content Include="Views\Sensor\Create.cshtml" />
+    <Content Include="Views\Sensor\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -117,8 +117,9 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            db.ProjectAccesses.RemoveRange(db.ProjectAccesses.Where(k => k.ProjectID == id));
-            db.Sensors.RemoveRange(db.Sensors.Where(k => k.ProjectID == id));
+            db.ProjectAccesses.RemoveRange(db.ProjectAccesses.Where(k => k.ProjectID == id)); //Remove accesses associated with the project
+            db.Sensors.Where(k => k.ProjectID == id).ForEachAsync(j => db.Readings.RemoveRange(db.Readings.Where(l => l.SensorID == j.ID))); //Remove readings for all sensors associated with the project
+            db.Sensors.RemoveRange(db.Sensors.Where(k => k.ProjectID == id)); //Remove all sensors associated with the project
             db.Projects.Remove(db.Projects.Find(id));
 
             db.SaveChanges();
@@ -145,7 +146,8 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAccessConfirmed(int id)
         {
-            db.ProjectAccesses.RemoveRange(db.ProjectAccesses.Where(k => k.ProjectAccessID == id));
+            ProjectAccess pa = db.ProjectAccesses.Find(id);
+            db.ProjectAccesses.RemoveRange(db.ProjectAccesses.Where(k => k.ProjectID == pa.ProjectID && k.UserName == pa.UserName));
 
             db.SaveChanges();
             return RedirectToAction("Index");

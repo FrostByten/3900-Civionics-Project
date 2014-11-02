@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>List</h2>
+<h2>List of Sensors</h2>
 
 @if (User.Identity.Name == "admin")
 {
     <p>
-        @Html.ActionLink("Add New", "Create")
+        @Html.ActionLink("Add New", "Create", new {id = ViewBag.projectid})
     </p>
 }
 
@@ -35,7 +35,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ID)
+                @Html.ActionLink(item.ID.ToString(), "../Reading/List", new { id = item.ID })
             </td>
             <td>
                 @if (item.Status == Civionics.Models.SensorStatus.Alert)
