@@ -32,6 +32,8 @@ namespace Civionics.Models
 
         [Display(Name = "Time")]
         public DateTime LoggedTime { get; set; }
+
+        [Display(Name = "Data")]
         public int Data { get; set; }
 
         public virtual Sensor Sensor { get; set; }

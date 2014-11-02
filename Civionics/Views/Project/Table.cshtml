@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Civionics.Models.Reading>
+
+@{
+    ViewBag.Title = "Readings";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Sensor Readings - Table</title>
+</head>
+
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                Sensor ID
+            </th>
+            <th>
+                Logged Time
+            </th>
+            <th>
+                Data
+            </th>
+            <th>
+                Is Anomalous
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoggedTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isAnomalous)
+                </td>
+            </tr>
+        }
+    </table>
+</body>
