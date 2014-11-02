@@ -18,34 +18,14 @@ namespace Civionics.Controllers
         // GET: /Project/
         public ActionResult Index()
         {
-            List<Project> o = new List<Project>();
-            List<Project> list = db.Projects.ToList();
-            List<ProjectAccess> access = db.ProjectAccesses.ToList();
-
-            System.Diagnostics.Debug.WriteLine("\n\n\nAccessing user permissions...\n\n");
-
-            for (int i = 0; i < list.Count; i++)
+            if (User.Identity.Name == "admin")
             {
-                if (User.Identity.Name == "admin")
-                {
-                    o.Add(list[i]);
-                    continue;
-                }
-                else
-                {
-                    for (int j = 0; j < access.Count; j++)
-                    {
-                        if ((list[i].ID == access[j].ProjectID) && (access[j].UserName == User.Identity.Name))
-                        {
-                            System.Diagnostics.Debug.WriteLine(User.Identity.Name + " is being sent project " + list[i].ID + " via project access " + access[j].ProjectAccessID);
-                            o.Add(list[i]);
-                            break;
-                        }
-                    }
-                }
+                return View(db.Projects.ToList());
             }
-
-            return View(o);
+            else
+            {
+                return View(db.Projects.Where(k=>db.ProjectAccesses.Any(j=>j.ProjectID==k.ID && j.UserName == User.Identity.Name)).ToList());
+            }
         }
 
         // GET: /Project/Details/5
@@ -198,10 +178,12 @@ namespace Civionics.Controllers
         }
 
         // GET: /Project/Add/5
-        public ActionResult Add(int i)
+        public ActionResult Add(int? id)
         {
-            ViewData.Add("addprojectid", i);
-            return View();
+            ProjectAccess pa = new ProjectAccess();
+            pa.ProjectID = (id == null ? 0 : (int)id);
+
+            return View(pa);
         }
 
         // POST: /Project/Add

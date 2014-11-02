@@ -1,22 +1,32 @@
-﻿@model IEnumerable<Civionics.Models.Project>
+﻿@model IEnumerable<Civionics.Models.Sensor>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>All Projects</h2>
+<h2>List</h2>
+
+@if (User.Identity.Name == "admin")
+{
+    <p>
+        @Html.ActionLink("Add New", "Create")
+    </p>
+}
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.ID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateAdded)
+            @Html.DisplayNameFor(model => model.SensorTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SiteID)
         </th>
         <th></th>
     </tr>
@@ -25,14 +35,14 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.Name, "../Sensor/List", new { id = item.ID })
+                @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>
-                @if (item.Status == Civionics.Models.ProjectStatus.Alert)
+                @if (item.Status == Civionics.Models.SensorStatus.Alert)
                 {
                     <img src="../Image/Get/red-orb" width="20" height="20" />
                 }
-                else if (item.Status == Civionics.Models.ProjectStatus.Warning)
+                else if (item.Status == Civionics.Models.SensorStatus.Warning)
                 {
                     <img src="../Image/Get/yellow-orb" width="20" height="20" />
                 }
@@ -43,20 +53,18 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateAdded)
+                @Html.DisplayFor(modelItem => item.SensorTypeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SiteID)
             </td>
             <td>
                 @if (User.Identity.Name == "admin")
                 {
-                    @Html.ActionLink("Edit Permissions", "Edit", new { id = item.ID })
+                    @Html.ActionLink("Settings", "Edit", new { id = item.ID })
+                    
                     <text>&nbsp;&#124;&nbsp;</text>
-                }
-
-                @Html.ActionLink("Details", "Details", new { id = item.ID })
-
-                @if (User.Identity.Name == "admin")
-                {
-                    <text>&nbsp;&#124;&nbsp;</text>
+                    
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })
                 }
             </td>
@@ -64,3 +72,4 @@
     }
 
 </table>
+

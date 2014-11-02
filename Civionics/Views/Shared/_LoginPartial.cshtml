@@ -11,7 +11,8 @@
         </li>
         @if (User.Identity.Name == "admin")
         {
-            <li>@Html.ActionLink("Create User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "adminRegLink" })</li>
+            <li>@Html.ActionLink("New Project", "Create", "Project", routeValues: null, htmlAttributes: new { id = "adminProjLink" })</li>
+            <li>@Html.ActionLink("New User", "Register", "Account", routeValues: null, htmlAttributes: new { id = "adminRegLink" })</li>
         }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
