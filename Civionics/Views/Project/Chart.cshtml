@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Readings";
+    
     // Layout = "~/Views/Shared/_Layout.cshtml";
     
     mo
@@ -14,7 +15,8 @@
 		xValue: data, xField: "Time",
 		yValues: data, yFields: "Value");
 	myChart.Write(); //direct output to screen
-    Html
+    myChart.AddSeries()
+    
 }
 
 
@@ -23,5 +25,5 @@
 </head>
 
 <body>
-        
+    
 </body>

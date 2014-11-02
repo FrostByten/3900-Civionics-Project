@@ -227,6 +227,8 @@
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Add.cshtml" />
     <Content Include="Views\Project\DeleteAccess.cshtml" />
+    <Content Include="Views\Project\Chart.cshtml" />
+    <Content Include="Views\Project\Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
