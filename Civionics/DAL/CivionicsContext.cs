@@ -18,6 +18,8 @@ namespace Civionics.DAL
         public DbSet<ProjectAccess> ProjectAccesses { get; set; }
         public DbSet<Sensor> Sensors { get; set; }
         public DbSet<Reading> Readings { get; set; }
+        public DbSet<Unit> Units { get; set; }
+        public DbSet<SensorType> Types { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -20,7 +20,6 @@ namespace Civionics.Models
     /// Data Members:
     ///     int SensorID
     ///     int ProjectID
-    ///     string Name
     ///     string Type
     ///     string Location
     ///     string UnitOfMeasure
@@ -34,19 +33,20 @@ namespace Civionics.Models
     {
         [Key]
         [Display(Name = "Sensor ID")]
-        public int SensorID { get; set; }
+        public int ID { get; set; }
 
         public int ProjectID { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Location { get; set; }
+        public string SensorTypeID { get; set; }
+        public string SiteID { get; set; }
 
         [Display(Name = "Units")]
-        public string UnitOfMeasure { get; set; }
+        public string UnitID { get; set; }
         public SensorStatus Status { get; set; }
-        public int MinSafeReading { get; set; }
-        public int MaxSafeReading { get; set; }
+        public int MinSafeReading { get; set; } // Ask rishi if needs decimal
+        public int MaxSafeReading { get; set; } // ^
 
+        public virtual Unit Unit { get; set; }
+        public virtual SensorType SensorType { get; set; }
         public virtual Project Project { get; set; }
         public virtual ICollection<Reading> Readings { get; set; }
     }
