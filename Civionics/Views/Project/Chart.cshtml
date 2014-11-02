@@ -1,21 +1,18 @@
 @model IEnumerable<Civionics.Models.Reading>
+@using System.Data;
 
 @{
     ViewBag.Title = "Readings";
     
     // Layout = "~/Views/Shared/_Layout.cshtml";
+    var data = new DataView();
     
-    mo
-	var db = Database.Open("databasename");
-	var data = db.Query("SELECT Time, Value FROM Readings WHERE sensorID = " + x);
-    var sensorName = db.Query("SELECT Name FROM Sensors WHERE sensorID = " + x);
 	var myChart = new Chart(width: 600, height: 400);
 	myChart.AddTitle("Data for sensor" + sensorName);
 	myChart.AddSeries(chartType: "Line",
 		xValue: data, xField: "Time",
 		yValues: data, yFields: "Value");
-	myChart.Write(); //direct output to screen
-    myChart.AddSeries()
+	myChart.Write(); //direct output to screen   
     
 }
 
