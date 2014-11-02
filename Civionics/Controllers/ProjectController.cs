@@ -55,6 +55,7 @@ namespace Civionics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Project project = db.Projects.Find(id);
             if (project == null)
             {
@@ -108,6 +109,7 @@ namespace Civionics.Controllers
             }
 
             ViewData.Add("projectid", id);
+            System.Diagnostics.Debug.WriteLine("Sending id: " + id);
 
             return View(o);
         }
@@ -198,10 +200,17 @@ namespace Civionics.Controllers
         }
 
         // GET: /Project/Add/5
-        public ActionResult Add(int i)
+        public ActionResult Add(int? id)
         {
-            ViewData.Add("addprojectid", i);
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ProjectAccess pa = new ProjectAccess();
+            pa.ProjectID = (int)id;
+
+            return View(pa);
         }
 
         // POST: /Project/Add

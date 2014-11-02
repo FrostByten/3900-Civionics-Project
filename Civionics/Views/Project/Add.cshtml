@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Add";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    int v = ViewBag.addprojectid;
 }
 
 <h2>Add</h2>
@@ -22,10 +21,9 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.UserName)
                 @Html.ValidationMessageFor(model => model.UserName)
-                @{Model.ProjectID = v;}
-                @Html.HiddenFor(m => m.ProjectID);
             </div>
         </div>
+        @Html.HiddenFor(model => model.ProjectID)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

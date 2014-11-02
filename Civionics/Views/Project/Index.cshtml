@@ -40,7 +40,18 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            @if(item.Status == Civionics.Models.ProjectStatus.Alert)
+            {
+                <img src="http://th03.deviantart.net/fs71/150/f/2010/181/5/1/Green_Glossy_Orb_by_Ikuei.jpg" />
+            }
+            else if(item.Status == Civionics.Models.ProjectStatus.Warning)
+            {
+                <img src="" />
+            }
+            else
+            {
+                <img src="http://th03.deviantart.net/fs71/150/f/2010/181/5/1/Green_Glossy_Orb_by_Ikuei.jpg" />
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateAdded)
