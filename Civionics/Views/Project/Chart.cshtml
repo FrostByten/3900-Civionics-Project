@@ -6,23 +6,23 @@
     // Layout = "~/Views/Shared/_Layout.cshtml";
     
     var data = new DataView();
-    var sensorName = "";
-    var sensorUnit = "";
+    var sensorName = ViewBag.sensorName;
+    var sensorUnitOfMeasure = ViewBag.sensorUnitOfMeasure;
     
     foreach(var reading in Model)
     {
         DataRowView rowView = data.AddNew();
         rowView[reading.LoggedTime.ToLongTimeString()] = reading.Data.ToString();
         rowView.EndEdit();
-        sensorName = reading.Sensor.Name.ToString();
-        sensorUnit = reading.Sensor.UnitOfMeasure.ToString();
+        // sensorName = reading.Sensor.Name.ToString();
+        // sensorUnit = reading.Sensor.UnitOfMeasure.ToString();
     }
         
 	var myChart = new Chart(width: 600, height: 400);
     myChart.AddTitle("Data for sensor" + sensorName);
 	myChart.AddSeries(chartType: "Line",
 		xValue: data, xField: "Time",
-		yValues: data, yFields: sensorUnit);
+        yValues: data, yFields: sensorUnitOfMeasure);
 	myChart.Write(); //direct output to screen       
 }
 
