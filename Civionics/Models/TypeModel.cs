@@ -18,8 +18,13 @@ namespace Civionics.Models
     /// </summary>
     public class SensorType
     {
-        //public int ID;
+        [Key]
+        public int ID { get; set; }
+
         [Display(Name = "Type")]
-        public string SensorTypeID { get; set; }
+        public string Type { get; set; }
+
+        [Display(Name = "Units")]
+        public string Units { get; set; }
     }
 }

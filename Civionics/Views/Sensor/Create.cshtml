@@ -7,6 +7,13 @@
 
 <h2>Create Sensor</h2>
 
+@if (User.Identity.Name == "admin")
+{
+    <p>
+        @Html.ActionLink("New Sensor Type", "New_Type")
+    </p>
+}
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -17,10 +24,10 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SensorTypeID, "SensorTypeID", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TypeID, "TypeID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("SensorTypeID", String.Empty)
-                @Html.ValidationMessageFor(model => model.SensorTypeID)
+                @Html.DropDownList("typeselectlist", new SelectList(ViewBag.typelist, Model))
+                @Html.ValidationMessageFor(model => model.TypeID)
             </div>
         </div>
 
@@ -29,14 +36,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SiteID)
                 @Html.ValidationMessageFor(model => model.SiteID)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UnitID, "UnitID", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UnitID", String.Empty)
-                @Html.ValidationMessageFor(model => model.UnitID)
             </div>
         </div>
 
@@ -66,5 +65,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "../Project/Index")
 </div>

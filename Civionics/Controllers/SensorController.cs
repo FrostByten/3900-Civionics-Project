@@ -34,6 +34,15 @@ namespace Civionics.Controllers
         {
             Sensor s = new Sensor();
             s.ProjectID = (id == null ? 0 : (int)id);
+            List<String> list = new List<String>();
+            List<SensorType> types = db.Types.ToList<SensorType>();
+            for(int i = 0; i < types.Count; i ++)
+            {
+                list.Add(types[i].Type + ":" + types[i].Units);
+            }
+
+            ViewBag.typelist = list;
+            
 
             return View(s);
         }
@@ -43,10 +52,14 @@ namespace Civionics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,SensorTypeID,SiteID,UnitID,MinSafeReading,MaxSafeReading")] Sensor sensor)
+        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading")] Sensor sensor, int? typeselectlist)
         {
+            System.Diagnostics.Debug.WriteLine(sensor.TypeID);
+            System.Diagnostics.Debug.WriteLine(typeselectlist);
             if (ModelState.IsValid)
             {
+                System.Diagnostics.Debug.WriteLine(sensor.TypeID);
+                sensor.TypeID = (int)typeselectlist;
                 sensor.Status = SensorStatus.Safe;
                 db.Sensors.Add(sensor);
                 db.SaveChanges();
@@ -81,6 +94,29 @@ namespace Civionics.Controllers
 
             db.SaveChanges();
             return RedirectToAction("../Project/Index");
+        }
+
+        // GET: /Sensor/New_Type
+        public ActionResult New_Type()
+        {
+            return View();
+        }
+
+        // POST: /Sensor/New_Type
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult New_Type([Bind(Include = "Type, Units")] SensorType sensortype)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Types.Add(sensortype);
+                db.SaveChanges();
+                return RedirectToAction("../Project/Index");
+            }
+
+            return View(sensortype);
         }
 	}
 }

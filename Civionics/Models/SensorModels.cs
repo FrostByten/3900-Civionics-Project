@@ -35,18 +35,17 @@ namespace Civionics.Models
         [Display(Name = "Sensor ID")]
         public int ID { get; set; }
 
+        [Display(Name = "Project ID")]
         public int ProjectID { get; set; }
-        public string SensorTypeID { get; set; }
+        [Display(Name = "Site ID")]
         public string SiteID { get; set; }
 
-        [Display(Name = "Units")]
-        public string UnitID { get; set; }
+        public int TypeID { get; set; }
         public SensorStatus Status { get; set; }
         public int MinSafeReading { get; set; } // Ask rishi if needs decimal
         public int MaxSafeReading { get; set; } // ^
 
-        public virtual Unit Unit { get; set; }
-        public virtual SensorType SensorType { get; set; }
+        public virtual SensorType Type { get; set; }
         public virtual Project Project { get; set; }
         public virtual ICollection<Reading> Readings { get; set; }
     }
