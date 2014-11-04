@@ -23,7 +23,7 @@
             @Html.DisplayNameFor(model => model.Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeID)
+            @Html.DisplayNameFor(model => model.Type.Type)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SiteID)
@@ -40,20 +40,20 @@
             <td>
                 @if (item.Status == Civionics.Models.SensorStatus.Alert)
                 {
-                    <img src="../Image/Get/red-orb" width="20" height="20" />
+                    <img src="../../Image/Get/red-orb" width="20" height="20" />
                 }
                 else if (item.Status == Civionics.Models.SensorStatus.Warning)
                 {
-                    <img src="../Image/Get/yellow-orb" width="20" height="20" />
+                    <img src="../../Image/Get/yellow-orb" width="20" height="20" />
                 }
                 else
                 {
-                    <img src="../Image/Get/green-orb" width="20" height="20" />
+                    <img src="../../Image/Get/green-orb" width="20" height="20" />
                 }
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TypeID)
+                @Html.DisplayFor(modelItem => item.Type.Type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.SiteID)

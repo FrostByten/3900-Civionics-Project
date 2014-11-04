@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TypeID, "TypeID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.TypeID, new SelectList(ViewBag.typelist, Model))
+                @Html.DropDownList("TypeID", (SelectList)ViewBag.typeselect, new { @class = "form-control" })
             </div>
         </div>
 

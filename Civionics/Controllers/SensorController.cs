@@ -41,8 +41,7 @@ namespace Civionics.Controllers
             {
                 list.Add(types[i].Type + ":" + types[i].Units);
             }
-
-            ViewBag.typelist = list;
+            ViewBag.typeselect = new SelectList(db.Types, "ID", "Type", s.TypeID);
             
             return View(s);
         }
@@ -52,30 +51,13 @@ namespace Civionics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading")] Sensor sensor, int? typeselectlist)
+        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading")] Sensor sensor)
         {
-            System.Diagnostics.Debug.WriteLine(sensor.TypeID);
-            System.Diagnostics.Debug.WriteLine(typeselectlist);
-            if (ModelState.IsValid)
-            {
-                System.Diagnostics.Debug.WriteLine(sensor.TypeID);
-                sensor.TypeID = (int)typeselectlist;
-                sensor.Status = SensorStatus.Safe;
-                db.Sensors.Add(sensor);
-                db.SaveChanges();
-                return RedirectToAction("List/" + sensor.ProjectID);
-            }
+            sensor.Status = SensorStatus.Safe;
 
-            List<String> list = new List<String>();
-            List<SensorType> types = db.Types.ToList<SensorType>();
-            for (int i = 0; i < types.Count; i++)
-            {
-                list.Add(types[i].Type + ":" + types[i].Units);
-            }
-
-            ViewBag.typelist = list;
-
-            return View(sensor);
+            db.Sensors.Add(sensor);
+            db.SaveChanges();
+            return RedirectToAction("List/" + sensor.ProjectID);
         }
 
         // GET: /Sensor/Delete/5
