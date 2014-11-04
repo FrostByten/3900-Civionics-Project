@@ -33,6 +33,7 @@ namespace Civionics.Controllers
         public ActionResult Create(int? id)
         {
             Sensor s = new Sensor();
+            s.TypeID = 0;
             s.ProjectID = (id == null ? 0 : (int)id);
             List<String> list = new List<String>();
             List<SensorType> types = db.Types.ToList<SensorType>();
@@ -43,7 +44,6 @@ namespace Civionics.Controllers
 
             ViewBag.typelist = list;
             
-
             return View(s);
         }
 
@@ -65,6 +65,15 @@ namespace Civionics.Controllers
                 db.SaveChanges();
                 return RedirectToAction("List/" + sensor.ProjectID);
             }
+
+            List<String> list = new List<String>();
+            List<SensorType> types = db.Types.ToList<SensorType>();
+            for (int i = 0; i < types.Count; i++)
+            {
+                list.Add(types[i].Type + ":" + types[i].Units);
+            }
+
+            ViewBag.typelist = list;
 
             return View(sensor);
         }
