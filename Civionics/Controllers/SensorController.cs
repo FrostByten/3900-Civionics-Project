@@ -55,9 +55,15 @@ namespace Civionics.Controllers
         {
             sensor.Status = SensorStatus.Safe;
 
-            db.Sensors.Add(sensor);
-            db.SaveChanges();
-            return RedirectToAction("List/" + sensor.ProjectID);
+            if (ModelState.IsValid)
+            {
+                db.Sensors.Add(sensor);
+                db.SaveChanges();
+                return RedirectToAction("List/" + sensor.ProjectID);
+            }
+
+            return View(sensor);
+            
         }
 
         // GET: /Sensor/Delete/5
@@ -108,6 +114,37 @@ namespace Civionics.Controllers
             }
 
             return View(sensortype);
+        }
+
+        // GET: /Sensor/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ViewData.Add("sensorid", id);
+
+            return View(db.Sensors.Where(k => k.ID == id).First());
+        }
+
+        // POST: /Sensor/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID,Name,Description,Status,DateAdded")] Sensor sensor)
+        {
+            if (ModelState.IsValid)
+            {
+                Sensor o = db.Sensors.Where(k => k.ID == sensor.ID).First();
+                o.MinSafeReading = sensor.MinSafeReading;
+                o.MaxSafeReading = sensor.MaxSafeReading;
+                db.SaveChanges();
+                return RedirectToAction("List/" + sensor.ProjectID);
+            }
+            return View();
         }
 	}
 }

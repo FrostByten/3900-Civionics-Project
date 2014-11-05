@@ -44,7 +44,6 @@ namespace Civionics.Models
         public SensorStatus Status { get; set; }
         [Display(Name = "Minimum Safe Reading")]
         public int MinSafeReading { get; set; } // Ask rishi if needs decimal
-        [GreaterThan("MinSafeReading")]
         [Display(Name = "Maximum Safe Reading")]
         public int MaxSafeReading { get; set; } // ^
 

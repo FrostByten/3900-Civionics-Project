@@ -1,40 +1,58 @@
 ﻿@model Civionics.Models.Sensor
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create Sensor</h2>
+<h2>Edit</h2>
 
-@if (User.Identity.Name == "admin")
-{
-    <p>
-        @Html.ActionLink("New Sensor Type", "New_Type", null, new { @class = "btn btn-default" })
-    </p>
-}
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Sensor</h4>
+        <h4>Edit Sensor</h4>
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TypeID, "TypeID", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Project.Name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("TypeID", (SelectList)ViewBag.typeselect, new { @class = "form-control" })
+                @Html.DisplayFor(model => model.Project.Name)
+                @Html.HiddenFor(model => model.ProjectID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ID, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.ID)
+                @Html.HiddenFor(model => model.ID)
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.SiteID, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SiteID)
-                @Html.ValidationMessageFor(model => model.SiteID)
+                @Html.DisplayFor(model => model.SiteID)
+                @Html.HiddenFor(model => model.SiteID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type.Type, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Type.Type)
+                @Html.HiddenFor(model => model.TypeID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Status)
+                @Html.HiddenFor(model => model.Status)
             </div>
         </div>
 
@@ -42,7 +60,6 @@
             @Html.LabelFor(model => model.MinSafeReading, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MinSafeReading)
-                @Html.DisplayFor(model => model.Type.Units)
                 @Html.ValidationMessageFor(model => model.MinSafeReading)
             </div>
         </div>
@@ -52,13 +69,12 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MaxSafeReading)
                 @Html.ValidationMessageFor(model => model.MaxSafeReading)
-                @Html.HiddenFor(m => m.ProjectID)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>

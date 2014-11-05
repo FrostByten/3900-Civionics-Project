@@ -254,6 +254,7 @@
     <Content Include="Views\Sensor\Create.cshtml" />
     <Content Include="Views\Sensor\Delete.cshtml" />
     <Content Include="Views\Sensor\New_Type.cshtml" />
+    <Content Include="Views\Sensor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
