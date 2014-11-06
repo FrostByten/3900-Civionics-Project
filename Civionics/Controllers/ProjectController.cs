@@ -70,6 +70,11 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Name,Description")] Project project)
         {
+            if(project.Name == null || project.Description == null)
+            {
+                ModelState.AddModelError("", "All fields are required.");
+                return View(project);
+            }
             if (ModelState.IsValid)
             {
                 project.DateAdded = DateTime.Now;

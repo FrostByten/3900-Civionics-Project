@@ -65,6 +65,24 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent")] Sensor sensor)
         {
+            List<String> list = new List<String>();
+            List<SensorType> types = db.Types.ToList<SensorType>();
+            for (int i = 0; i < types.Count; i++)
+            {
+                list.Add(types[i].Type + ":" + types[i].Units);
+            }
+            ViewBag.typeselect = new SelectList(db.Types, "ID", "Type", sensor.TypeID);
+
+            if(sensor.MaxSafeReading <= sensor.MinSafeReading)
+            {
+                ModelState.AddModelError("", "Max reading must be larger than min reading.");
+                return View(sensor);
+            }
+            if(sensor.SiteID == null)
+            {
+                ModelState.AddModelError("", "Site ID is a required field.");
+                return View(sensor);
+            }
             sensor.Status = SensorStatus.Safe;
             if (!sensor.AutoRange)
             {
@@ -161,6 +179,11 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent")] Sensor sensor)
         {
+            if(sensor.MaxSafeReading <= sensor.MinSafeReading)
+            {
+                ModelState.AddModelError("", "Max reading must be larger than min reading.");
+                return View();
+            }
             if (ModelState.IsValid)
             {
                 Sensor o = db.Sensors.Find(sensor.ID);
