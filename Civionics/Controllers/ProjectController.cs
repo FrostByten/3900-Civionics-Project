@@ -179,6 +179,13 @@ namespace Civionics.Controllers
             ProjectAccess pa = new ProjectAccess();
             pa.ProjectID = (id == null ? 0 : (int)id);
 
+            List<String> list = new List<String>();
+            ApplicationDbContext dbc = new ApplicationDbContext();
+            List<ApplicationUser> users = dbc.Users.ToList<ApplicationUser>();
+            users.Remove(users.Where(k => k.UserName == "admin").First());
+
+            ViewBag.userselect = new SelectList(users, "Username", "Username", pa.UserName);
+
             return View(pa);
         }
 
@@ -195,6 +202,21 @@ namespace Civionics.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else if(au==null)
+            {
+                ModelState.AddModelError("", "No such user exists!");
+            }
+            else if(exists)
+            {
+                ModelState.AddModelError("", "User already has permission for this project!");
+            }
+
+            List<String> list = new List<String>();
+            ApplicationDbContext dbc = new ApplicationDbContext();
+            List<ApplicationUser> users = dbc.Users.ToList<ApplicationUser>();
+            users.Remove(users.Where(k => k.UserName == "admin").First());
+
+            ViewBag.userselect = new SelectList(users, "Id", "Username", projectaccess.UserName);
 
             return View(projectaccess);
         }

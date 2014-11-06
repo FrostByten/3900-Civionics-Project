@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -82,7 +83,7 @@ namespace Civionics.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Project");
+                    return RedirectToAction("List", "Account");
                 }
                 else
                 {
@@ -298,6 +299,54 @@ namespace Civionics.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        //
+        // GET: /Account/List
+        public ActionResult List()
+        {
+            ApplicationDbContext dbc = new ApplicationDbContext();
+            List<ApplicationUser> list = dbc.Users.ToList();
+            list.OrderBy(k => k.UserName);
+
+            List<string> names = new List<string>();
+            for(int i = 0; i < list.Count; i++)
+            {
+                if(list[i].UserName != "admin")
+                    names.Add(list[i].UserName);
+            }
+            dbc.Dispose();
+
+            return View(names);
+        }
+
+        //
+        // GET: /Account/Delete
+        public ActionResult Delete(string id)
+        {
+            ApplicationDbContext dbc = new ApplicationDbContext();
+            ApplicationUser au = dbc.Users.Where(k => k.UserName == id).First();
+
+            return View(au);
+        }
+
+        //
+        // POST: /Account/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(ApplicationUser au)
+        {
+            if (au.Id == "admin")
+                return RedirectToAction("List");
+
+            ApplicationDbContext dbc = new ApplicationDbContext();
+            dbc.Users.Remove(dbc.Users.Where(k => k.UserName == au.Id).First());
+            DAL.CivionicsContext c = new DAL.CivionicsContext();
+            c.ProjectAccesses.RemoveRange(c.ProjectAccesses.Where(k => k.UserName == au.Id));
+            c.SaveChanges();
+            dbc.SaveChanges();
+
+            return RedirectToAction("List");
         }
 
         [ChildActionOnly]

@@ -9,7 +9,7 @@
 <h2>Edit Permissions</h2>
 
 <p>
-    @Html.ActionLink("Add Permission", a)
+    @Html.ActionLink("Add Permission", a, null, new { @class = "btn btn-default" })
 </p>
 
 <table class="table">
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Delete", "DeleteAccess", new { id = item.ProjectAccessID })
+                @Html.ActionLink("Delete", "DeleteAccess", new { id = item.ProjectAccessID }, new { @class = "btn btn-default" })
             </td>
         </tr>
     }
@@ -48,7 +48,7 @@
 </table>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {
