@@ -74,6 +74,7 @@
                 @if (User.Identity.Name == "admin")
                 {
                     @Html.ActionLink("Settings", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                    
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-default" })
                 }
             </td>

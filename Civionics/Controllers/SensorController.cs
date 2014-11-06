@@ -83,6 +83,11 @@ namespace Civionics.Controllers
                 ModelState.AddModelError("", "Site ID is a required field.");
                 return View(sensor);
             }
+            if (sensor.AutoPercent <= 0 || sensor.AutoPercent > 100)
+            {
+                ModelState.AddModelError("", "Auto Percent should be a number between 0 and 99");
+                return View(sensor);
+            }
             sensor.Status = SensorStatus.Safe;
             if (!sensor.AutoRange)
             {
@@ -179,35 +184,41 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent")] Sensor sensor)
         {
-            if(sensor.MaxSafeReading <= sensor.MinSafeReading)
+            Sensor o = db.Sensors.Find(sensor.ID);
+            if (o == null)
             {
-                ModelState.AddModelError("", "Max reading must be larger than min reading.");
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
+            o.MinSafeReading = sensor.MinSafeReading;
+            o.MaxSafeReading = sensor.MaxSafeReading;
+            o.AutoRange = sensor.AutoRange;
+
+            if (sensor.AutoRange)
+            {
+                o.AutoPercent = sensor.AutoPercent;
+            }
+            else
+            {
+                o.AutoPercent = 0;
+            }
+            ViewData.Add("projectid", o.ProjectID.ToString());
             if (ModelState.IsValid)
             {
-                Sensor o = db.Sensors.Find(sensor.ID);
-                if (o == null)
+                if (sensor.MaxSafeReading <= sensor.MinSafeReading)
                 {
-                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                    ModelState.AddModelError("", "Max reading must be larger than min reading.");
+                    return View(o);
                 }
-                o.MinSafeReading = sensor.MinSafeReading;
-                o.MaxSafeReading = sensor.MaxSafeReading;
-                o.AutoRange = sensor.AutoRange;
-
-                if(sensor.AutoRange)
+                if(sensor.AutoPercent <=0 || sensor.AutoPercent >100)
                 {
-                    o.AutoPercent = sensor.AutoPercent;
-                }
-                else
-                {
-                    o.AutoPercent = 0;
+                    ModelState.AddModelError("", "Auto Percent should be a number between 0 and 99");
+                    return View(o);
                 }
 
                 db.SaveChanges();
                 return RedirectToAction("List/" + o.ProjectID);
             }
-            return View();
+            return View(o);
         }
 	}
 }
