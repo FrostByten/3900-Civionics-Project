@@ -6,6 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using Civionics.Models;
 using Civionics.DAL;
 
@@ -13,7 +16,18 @@ namespace Civionics.Controllers
 {
     public class ProjectController : Controller
     {
+        public ProjectController()
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        {
+        }
+
+        public ProjectController(UserManager<ApplicationUser> userManager)
+        {
+            UserManager = userManager;
+        }
+
         private CivionicsContext db = new CivionicsContext();
+        public UserManager<ApplicationUser> UserManager { get; private set; }
 
         // GET: /Project/
         public ActionResult Index()
@@ -74,6 +88,12 @@ namespace Civionics.Controllers
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Project p = db.Projects.Find(id);
+            if (p == null)
+            {
+                return HttpNotFound();
             }
 
             ViewData.Add("projectid", id);
@@ -167,15 +187,13 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add([Bind(Include = "ProjectID, UserName")] ProjectAccess projectaccess)
         {
-            if (ModelState.IsValid)
+            ApplicationUser au = UserManager.FindByName(projectaccess.UserName);
+            bool exists = db.ProjectAccesses.Any(k => (k.UserName == projectaccess.UserName) && (k.ProjectID == projectaccess.ProjectID));
+            if (ModelState.IsValid && au!=null && !exists)
             {
                 db.ProjectAccesses.Add(projectaccess);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine(projectaccess.ProjectAccessID + ", " + projectaccess.ProjectID + ", " + projectaccess.UserName);
             }
 
             return View(projectaccess);

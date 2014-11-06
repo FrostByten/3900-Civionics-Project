@@ -23,6 +23,11 @@ namespace Civionics.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Project p = db.Projects.Find(id);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
 
             ViewData.Add("projectid", id);
 
@@ -32,6 +37,12 @@ namespace Civionics.Controllers
         // GET: /Sensor/Create
         public ActionResult Create(int? id)
         {
+            Project p = db.Projects.Find(id);
+            if (p == null)
+            {
+                return HttpNotFound();
+            }
+
             Sensor s = new Sensor();
             s.TypeID = 0;
             s.ProjectID = (id == null ? 0 : (int)id);
@@ -42,6 +53,7 @@ namespace Civionics.Controllers
                 list.Add(types[i].Type + ":" + types[i].Units);
             }
             ViewBag.typeselect = new SelectList(db.Types, "ID", "Type", s.TypeID);
+            ViewData.Add("projectid", id.ToString());
             
             return View(s);
         }
@@ -51,9 +63,13 @@ namespace Civionics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading")] Sensor sensor)
+        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent")] Sensor sensor)
         {
             sensor.Status = SensorStatus.Safe;
+            if (!sensor.AutoRange)
+            {
+                sensor.AutoPercent = 0;
+            }
 
             if (ModelState.IsValid)
             {
@@ -76,8 +92,11 @@ namespace Civionics.Controllers
             Sensor sensor = db.Sensors.Find(id);
             if (sensor == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
+
+            ViewData.Add("projectid", sensor.ProjectID.ToString());
+
             return View(sensor);
         }
 
@@ -124,9 +143,15 @@ namespace Civionics.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            Sensor s = db.Sensors.Find(id);
+            if (s == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
             ViewData.Add("sensorid", id);
+            ViewData.Add("projectid", s.ProjectID.ToString());
 
-            return View(db.Sensors.Where(k => k.ID == id).First());
+            return View(s);
         }
 
         // POST: /Sensor/Edit/5
@@ -134,15 +159,30 @@ namespace Civionics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,Description,Status,DateAdded")] Sensor sensor)
+        public ActionResult Edit([Bind(Include = "ID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent")] Sensor sensor)
         {
             if (ModelState.IsValid)
             {
-                Sensor o = db.Sensors.Where(k => k.ID == sensor.ID).First();
+                Sensor o = db.Sensors.Find(sensor.ID);
+                if (o == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                }
                 o.MinSafeReading = sensor.MinSafeReading;
                 o.MaxSafeReading = sensor.MaxSafeReading;
+                o.AutoRange = sensor.AutoRange;
+
+                if(sensor.AutoRange)
+                {
+                    o.AutoPercent = sensor.AutoPercent;
+                }
+                else
+                {
+                    o.AutoPercent = 0;
+                }
+
                 db.SaveChanges();
-                return RedirectToAction("List/" + sensor.ProjectID);
+                return RedirectToAction("List/" + o.ProjectID);
             }
             return View();
         }

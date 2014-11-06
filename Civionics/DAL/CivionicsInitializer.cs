@@ -8,7 +8,7 @@ using Civionics.Models;
 
 namespace Civionics.DAL
 {
-    public class CivionicsInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<CivionicsContext>
+    public class CivionicsInitializer : System.Data.Entity.DropCreateDatabaseAlways<CivionicsContext>
     {
         protected override void Seed(CivionicsContext context)
         {
