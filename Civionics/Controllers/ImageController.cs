@@ -13,7 +13,6 @@ namespace Civionics.Controllers
         public ActionResult Get(string id)
         {
             var path = "/Images/" + id + ".png";
-            System.Diagnostics.Debug.WriteLine(path);
 
             return base.File(path, "image/png");
         }
