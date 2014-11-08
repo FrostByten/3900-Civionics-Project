@@ -22,7 +22,14 @@ namespace Civionics
 
         public const string WATCH_PATH = "/xls"; //The path to probe when watching
 
-        public const int PURGE_OFFSET = 5; //Purge offset from today in days
+        public const int PURGE_OFFSET = 15; //Purge offset from today in days
+
+        public const int SENSOR_WARNING_LEVEL = 1; //The amount of anomalous readings before a sensor has a warning
+        public const int SENSOR_ALERT_LEVEL = 3; //The amount of anomalous readings before a sensor has an alert
+        public const int SENSOR_WARNING_WEIGHT = 1; //The weight of a sensor warning considered when re-evaluating a project
+        public const int SENSOR_ALERT_WEIGHT = 3; //The weight of a sensor alert considered when re-evaluating a project
+        public const int PROJECT_WARNING_LEVEL = 3; //The amount of sensor weights before a project has a warning
+        public const int PROJECT_ALERT_LEVEL = 9; //The amount of sensor weights before a project has an alert
 
         private static DateTime last;
 
@@ -54,12 +61,12 @@ namespace Civionics
         {
             if(DEBUG)
                 System.Diagnostics.Debug.WriteLine("Watch thread active");
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY)); // Wait
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY)); // Wait for the system to start
 
             for(;;)
             {
                 touch_folder();
-                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30)); // Wait
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(WATCH_PERIOD)); // Wait to loop
             }
         }
 
@@ -67,28 +74,28 @@ namespace Civionics
         {
             if(DEBUG)
                 System.Diagnostics.Debug.WriteLine("Status thread active");
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 5)); // Wait
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 5)); // Wait for the system to start
 
             for (;;)
             {
                 calculate_status();
-                System.Threading.Thread.Sleep(TimeSpan.FromHours(STATUS_PERIOD)); // Wait
+                System.Threading.Thread.Sleep(TimeSpan.FromHours(STATUS_PERIOD)); // Wait to loop
             }
         }
 
         static void purge_loop()
         {
             DateTime now = DateTime.Now;
-            now.AddDays(-15);
+            now.AddDays(-1 * PURGE_OFFSET);
 
             if (DEBUG)
-                System.Diagnostics.Debug.WriteLine("Purging everything before: " + now.ToString() + "...");
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 10));
+                System.Diagnostics.Debug.WriteLine("Purge thread active");
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 10)); // Wait for the system to start
 
             for(;;)
             {
                 purge();
-                System.Threading.Thread.Sleep(TimeSpan.FromHours(PURGE_PERIOD));
+                System.Threading.Thread.Sleep(TimeSpan.FromHours(PURGE_PERIOD)); //Wait to loop
             }
         }
 
@@ -111,23 +118,40 @@ namespace Civionics
             {
                 if(DEBUG)
                     System.Diagnostics.Debug.WriteLine("Project: " + projlist[i].ID);
+
+                int projlev = 0;
+                int totcount = 0;
+                ProjectStatus status = ProjectStatus.Safe;
                 List<Sensor> senslist = db.Sensors.Where(s => s.ProjectID == projlist[i].ID).ToList();
 
                 for (int j = 0; j < senslist.Count; j++) // For each sensor in project
                 {
                     if(DEBUG)
                         System.Diagnostics.Debug.WriteLine("\tSensor: " + senslist[j].ID);
+
+                    int sencount = 0;
+                    SensorStatus senstatus = SensorStatus.Safe;
                     List<Reading> readlist = db.Readings.Where(r => (r.SensorID == senslist[j].ID) && (r.LoggedTime > last)).OrderByDescending(r => r.LoggedTime).ToList();
 
                     for (int k = 0; k < readlist.Count; k++)
                     {
                         if(DEBUG)
                             System.Diagnostics.Debug.WriteLine("\t\tReading: " + readlist[k].ID + ", Date: " + readlist[k].LoggedTime);
-
-                        //do shit here
+                        if (readlist[k].isAnomalous)
+                            sencount++;
+                        totcount++;
                     }
+
+                    projlev += sencount;
+                    senstatus = (sencount > 0 ? (sencount > 2 ? SensorStatus.Alert : SensorStatus.Warning) : SensorStatus.Safe);
+                    senslist[j].Status = senstatus;
                 }
+
+                int total = (projlev / totcount);
+                status = total>=PROJECT_ALERT_LEVEL?ProjectStatus.Alert:(total>=PROJECT_WARNING_LEVEL?ProjectStatus.Warning:ProjectStatus.Safe);
+                projlist[i].Status = status;
             }
+            db.SaveChanges();
         }
 
         static void purge()
@@ -135,9 +159,14 @@ namespace Civionics
             CivionicsContext db = new CivionicsContext();
 
             DateTime now = DateTime.Now;
-            now.AddDays(-15);
+            now.AddDays(-1 * PURGE_OFFSET);
+
+            if(DEBUG)
+                System.Diagnostics.Debug.WriteLine("Purging everything before: " + now.ToString() + "...");
 
             db.Readings.RemoveRange(db.Readings.Where(k => k.LoggedTime < now));
+
+            db.SaveChanges();
         }
     }
 }
