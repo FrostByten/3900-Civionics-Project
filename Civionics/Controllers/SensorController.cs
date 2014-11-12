@@ -83,7 +83,7 @@ namespace Civionics.Controllers
                 ModelState.AddModelError("", "Site ID is a required field.");
                 return View(sensor);
             }
-            if (sensor.AutoPercent <= 0 || sensor.AutoPercent > 100)
+            if ((sensor.AutoPercent <= 0 || sensor.AutoPercent > 100) && sensor.AutoRange)
             {
                 ModelState.AddModelError("", "Auto Percent should be a number between 0 and 99");
                 return View(sensor);
@@ -209,7 +209,7 @@ namespace Civionics.Controllers
                     ModelState.AddModelError("", "Max reading must be larger than min reading.");
                     return View(o);
                 }
-                if(sensor.AutoPercent <=0 || sensor.AutoPercent >100)
+                if((sensor.AutoPercent <=0 || sensor.AutoPercent >100) && sensor.AutoRange)
                 {
                     ModelState.AddModelError("", "Auto Percent should be a number between 0 and 99");
                     return View(o);

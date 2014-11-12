@@ -33,6 +33,9 @@ namespace Civionics.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Project");
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
