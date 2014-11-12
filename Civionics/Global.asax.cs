@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Threading;
+using System.Text;
+using System.IO;
 using Civionics.DAL;
 using Civionics.Models;
 
@@ -13,6 +15,8 @@ namespace Civionics
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        public static CivionicsContext db = new CivionicsContext();
+
         public const bool DEBUG = true;
 
         public const int START_DELAY = 60; //The delay (in seconds) to wait after application startup to launch the task threads
@@ -20,7 +24,7 @@ namespace Civionics
         public const int STATUS_PERIOD = 1; //How often the status thread should re-calculate project and sensor statuses (in hours)
         public const int PURGE_PERIOD = 24; //How often the server purges old data from the database (in hours)
 
-        public const string WATCH_PATH = "/xls"; //The path to probe when watching
+        public const string WATCH_PATH = "\\Dropbox\\"; //The path to probe when watching
 
         public const int PURGE_OFFSET = 15; //Purge offset from today in days
 
@@ -32,6 +36,7 @@ namespace Civionics
         public const int PROJECT_ALERT_LEVEL = 9; //The amount of sensor weights before a project has an alert
 
         private static DateTime last;
+        private static string dir;
 
         protected void Application_Start()
         {
@@ -40,33 +45,59 @@ namespace Civionics
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            FileSystemWatcher watcher;
+
+            dir = Directory.GetCurrentDirectory() + WATCH_PATH;
+
+            if(!Directory.Exists(dir))
+            {
+                System.Diagnostics.Debug.WriteLine("Directory " + dir + " does not exist.");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Watching directory: " + dir);
+                watcher = new FileSystemWatcher();
+                watcher.Path = dir;
+                watcher.IncludeSubdirectories = true;
+                watcher.NotifyFilter = NotifyFilters.Size | NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.CreationTime;
+                watcher.Filter = "*.*";
+                watcher.Created += new FileSystemEventHandler(watcher_Created);
+                watcher.EnableRaisingEvents = true;
+            }
+
             last = DateTime.Now;
 
-            ThreadStart watch_task = new ThreadStart(watch_loop);
             ThreadStart status_task = new ThreadStart(status_loop);
             ThreadStart purge_task = new ThreadStart(purge_loop);
 
-            Thread watcher = new Thread(watch_task);
             Thread statusupdater = new Thread(status_task);
             Thread purger = new Thread(purge_task);
             
-            //watcher.Start();
             //statusupdater.Start();
             //purger.Start();
+
+            if (DEBUG)
+                System.Diagnostics.Debug.WriteLine("Current date is: " + last.ToString());
 
             System.Diagnostics.Debug.WriteLine("System ready...\n");
         }
 
-        static void watch_loop()
+        static void watcher_Created(object sender, FileSystemEventArgs e)
         {
-            if(DEBUG)
-                System.Diagnostics.Debug.WriteLine("Watch thread active");
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY)); // Wait for the system to start
+            bool handled = false;
 
-            for(;;)
+            System.Diagnostics.Debug.WriteLine("A new file was created at: " + e.FullPath + ".");
+
+            while (!handled)
             {
-                touch_folder();
-                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(WATCH_PERIOD)); // Wait to loop
+                try
+                {
+                    //File handling logic goes here ---------------------------------------------------------------------------------------
+                    //File.Delete(e.FullPath);
+                    handled = true;
+                    System.Diagnostics.Debug.WriteLine("Handled file: " + e.Name);
+                }
+                catch(Exception ex){}
             }
         }
 
@@ -85,9 +116,6 @@ namespace Civionics
 
         static void purge_loop()
         {
-            DateTime now = DateTime.Now;
-            now.AddDays(-1 * PURGE_OFFSET);
-
             if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Purge thread active");
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 10)); // Wait for the system to start
@@ -99,19 +127,10 @@ namespace Civionics
             }
         }
 
-        static void touch_folder()
-        {
-            if (DEBUG)
-                System.Diagnostics.Debug.WriteLine("Touching folder: " + WATCH_PATH);
-
-            //do shit here
-        }
-
         static void calculate_status()
         {
             last = DateTime.Now;
 
-            CivionicsContext db = new CivionicsContext();
             List<Project> projlist = db.Projects.ToList();
 
             for (int i = 0; i < projlist.Count; i++) // For each project
@@ -154,17 +173,14 @@ namespace Civionics
             db.SaveChanges();
         }
 
-        static void purge()
+        static void purge(int length = PURGE_OFFSET)
         {
-            CivionicsContext db = new CivionicsContext();
-
-            DateTime now = DateTime.Now;
-            now.AddDays(-1 * PURGE_OFFSET);
+            DateTimeOffset dt = DateTimeOffset.Now.AddDays(-1 * length);
 
             if(DEBUG)
-                System.Diagnostics.Debug.WriteLine("Purging everything before: " + now.ToString() + "...");
+                System.Diagnostics.Debug.WriteLine("Purging everything before: " + dt.DateTime.ToString() + "...");
 
-            db.Readings.RemoveRange(db.Readings.Where(k => k.LoggedTime < now));
+            db.Readings.RemoveRange(db.Readings.Where(k => k.LoggedTime < dt.DateTime));
 
             db.SaveChanges();
         }
