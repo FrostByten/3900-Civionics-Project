@@ -74,7 +74,7 @@ namespace Civionics
             Thread purger = new Thread(purge_task);
             
             //statusupdater.Start();
-            //purger.Start();
+            purger.Start();
 
             if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Current date is: " + last.ToString());
@@ -103,9 +103,10 @@ namespace Civionics
 
         static void status_loop()
         {
-            if(DEBUG)
-                System.Diagnostics.Debug.WriteLine("Status thread active");
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 5)); // Wait for the system to start
+
+            if (DEBUG)
+                System.Diagnostics.Debug.WriteLine("Status thread active");
 
             for (;;)
             {
@@ -116,9 +117,10 @@ namespace Civionics
 
         static void purge_loop()
         {
+            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 10)); // Wait for the system to start
+
             if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Purge thread active");
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 10)); // Wait for the system to start
 
             for(;;)
             {
@@ -130,6 +132,9 @@ namespace Civionics
         static void calculate_status()
         {
             last = DateTime.Now;
+
+            if (DEBUG)
+                System.Diagnostics.Debug.WriteLine("Computing statuses.");
 
             List<Project> projlist = db.Projects.ToList();
 
@@ -171,18 +176,30 @@ namespace Civionics
                 projlist[i].Status = status;
             }
             db.SaveChanges();
+
+            if (DEBUG)
+                System.Diagnostics.Debug.WriteLine("Finished computing statuses.");
         }
 
         static void purge(int length = PURGE_OFFSET)
         {
             DateTimeOffset dt = DateTimeOffset.Now.AddDays(-1 * length);
 
-            if(DEBUG)
+            if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Purging everything before: " + dt.DateTime.ToString() + "...");
 
-            db.Readings.RemoveRange(db.Readings.Where(k => k.LoggedTime < dt.DateTime));
+            try
+            {
+                db.Readings.RemoveRange(db.Readings.Where(k => k.LoggedTime < dt.DateTime));
 
-            db.SaveChanges();
+                db.SaveChanges();
+                if (DEBUG)
+                    System.Diagnostics.Debug.WriteLine("Finished purging readings.");
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception thrown during purge: " + ex.Message + "\n\n" + ex.StackTrace + "\n");
+            }
         }
     }
 }
