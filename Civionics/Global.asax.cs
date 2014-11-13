@@ -97,7 +97,10 @@ namespace Civionics
                     handled = true;
                     System.Diagnostics.Debug.WriteLine("Handled file: " + e.Name);
                 }
-                catch(Exception ex) {}
+                catch(Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Error handling file: " + ex.Message + ". Retrying...");
+                }
             }
         }
 
@@ -160,6 +163,9 @@ namespace Civionics
                     SensorStatus senstatus = SensorStatus.Safe;
                     List<Reading> readlist = dbr.Readings.ToList().Where(r => (r.SensorID == senslist[j].ID) && (r.LoggedTime > last)).ToList().OrderByDescending(r => r.LoggedTime).ToList();
 
+                    int readcount = 0;
+                    float readavg = 0;
+
                     for (int k = 0; k < readlist.Count; k++)
                     {
                         if(DEBUG)
@@ -167,11 +173,20 @@ namespace Civionics
                         if (readlist[k].isAnomalous)
                             sencount++;
                         totcount++;
+                        readcount++;
+                        readavg += readlist[k].Data;
                     }
 
+                    readavg = readavg / readcount;
                     projlev += sencount;
                     senstatus = (sencount > 0 ? (sencount > 2 ? SensorStatus.Alert : SensorStatus.Warning) : SensorStatus.Safe);
                     senslist[j].Status = senstatus;
+
+                    if (senslist[j].AutoRange)
+                    {
+                        senslist[j].MaxSafeReading = readavg * (1 + senslist[j].AutoPercent);
+                        senslist[j].MinSafeReading = readavg * (-1 * (1 + (senslist[j].AutoPercent)));
+                    }
                 }
 
                 if (totcount == 0)
