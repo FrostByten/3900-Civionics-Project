@@ -73,7 +73,7 @@ namespace Civionics
             Thread statusupdater = new Thread(status_task);
             Thread purger = new Thread(purge_task);
             
-            //statusupdater.Start();
+            statusupdater.Start();
             purger.Start();
 
             if (DEBUG)
@@ -97,7 +97,7 @@ namespace Civionics
                     handled = true;
                     System.Diagnostics.Debug.WriteLine("Handled file: " + e.Name);
                 }
-                catch(Exception ex){}
+                catch(Exception ex) {}
             }
         }
 
@@ -133,6 +133,9 @@ namespace Civionics
         {
             last = DateTime.Now;
 
+            CivionicsContext dbs = new CivionicsContext();
+            CivionicsContext dbr = new CivionicsContext();
+
             if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Computing statuses.");
 
@@ -146,7 +149,7 @@ namespace Civionics
                 int projlev = 0;
                 int totcount = 0;
                 ProjectStatus status = ProjectStatus.Safe;
-                List<Sensor> senslist = db.Sensors.Where(s => s.ProjectID == projlist[i].ID).ToList();
+                List<Sensor> senslist = dbs.Sensors.ToList().Where(s => s.ProjectID == projlist[i].ID).ToList();
 
                 for (int j = 0; j < senslist.Count; j++) // For each sensor in project
                 {
@@ -155,7 +158,7 @@ namespace Civionics
 
                     int sencount = 0;
                     SensorStatus senstatus = SensorStatus.Safe;
-                    List<Reading> readlist = db.Readings.Where(r => (r.SensorID == senslist[j].ID) && (r.LoggedTime > last)).OrderByDescending(r => r.LoggedTime).ToList();
+                    List<Reading> readlist = dbr.Readings.ToList().Where(r => (r.SensorID == senslist[j].ID) && (r.LoggedTime > last)).ToList().OrderByDescending(r => r.LoggedTime).ToList();
 
                     for (int k = 0; k < readlist.Count; k++)
                     {
@@ -171,11 +174,19 @@ namespace Civionics
                     senslist[j].Status = senstatus;
                 }
 
-                int total = (projlev / totcount);
-                status = total>=PROJECT_ALERT_LEVEL?ProjectStatus.Alert:(total>=PROJECT_WARNING_LEVEL?ProjectStatus.Warning:ProjectStatus.Safe);
-                projlist[i].Status = status;
+                if (totcount == 0)
+                    projlist[i].Status = ProjectStatus.Safe;
+                else
+                {
+                    int total = (projlev / totcount);
+                    status = total >= PROJECT_ALERT_LEVEL ? ProjectStatus.Alert : (total >= PROJECT_WARNING_LEVEL ? ProjectStatus.Warning : ProjectStatus.Safe);
+                    projlist[i].Status = status;
+                }
             }
+
             db.SaveChanges();
+            dbs.SaveChanges();
+            dbr.SaveChanges();
 
             if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Finished computing statuses.");
