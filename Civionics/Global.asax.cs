@@ -191,12 +191,16 @@ namespace Civionics
 
                 if (totcount == 0)
                     projlist[i].Status = ProjectStatus.Safe;
+
                 else
                 {
                     int total = (projlev / totcount);
                     status = total >= PROJECT_ALERT_LEVEL ? ProjectStatus.Alert : (total >= PROJECT_WARNING_LEVEL ? ProjectStatus.Warning : ProjectStatus.Safe);
                     projlist[i].Status = status;
                 }
+
+                if (DEBUG)
+                    System.Diagnostics.Debug.WriteLine("Computed Status: " + projlist[i].Status.ToString() + "\n");
             }
 
             db.SaveChanges();
