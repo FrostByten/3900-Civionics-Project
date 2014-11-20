@@ -1,38 +1,48 @@
 @model IEnumerable<Civionics.Models.Reading>
 @using System.Data;
 
+
 @{
     ViewBag.Title = "Readings";
     // Layout = "~/Views/Shared/_Layout.cshtml";
 
     DataSet dataSet = new DataSet();
+    DataSet ds2 = new DataSet();
     DataTable dataTable = new DataTable("Table");
+    DataTable dataTableAnom = new DataTable("TableAnom");
 
     dataTable.Columns.Add("LoggedTime", typeof(string));
     dataTable.Columns.Add("Data", typeof(double));
+    dataTableAnom.Columns.Add("LoggedTime", typeof(string));
+    dataTableAnom.Columns.Add("Anomalous", typeof(double));
     dataSet.Tables.Add(dataTable);
+    ds2.Tables.Add(dataTableAnom);
 
     double minRecordedData = double.MaxValue;
     double maxRecordedData = double.MinValue;
-    foreach(var reading in Model)
-    { 
+    foreach (var reading in Model)
+    {
         dataTable.Rows.Add(reading.LoggedTime.ToString(), reading.Data);
+        dataTableAnom.Rows.Add(reading.LoggedTime, reading.isAnomalous ? reading.Data : Int32.MaxValue);
         minRecordedData = Math.Min(minRecordedData, reading.Data);
         maxRecordedData = Math.Max(maxRecordedData, reading.Data);
     }
-    
-    var dataView = new DataView(dataSet.Tables["Table"]);
 
-    var myChart = new Chart(width: 800, height: 600);
-    myChart.AddTitle("Project ID: " + ViewData["projectid"] + " / " +
-                     "Sensor ID: " + ViewData["sensorid"] + " / " + 
-                     "Sensor Type: " + ViewData["type"] + " / " + 
-                     "Site: " + ViewData["site"]);
-	myChart.AddSeries(chartType: "Line",
-		              xValue: dataView, xField: "LoggedTime",
-                      yValues: dataView, yFields: "Data");                      
+    var dataView = new DataView(dataSet.Tables["Table"]);
+    var dataViewAnom = new DataView(ds2.Tables["TableAnom"]);
+    var empty = new DataView();
+
+    var myChart = new Chart(width: 1000, height: 490, theme: ChartTheme.Green);
+    
+    //myChart.AddSeries(chartType: "Column", xValue: dataViewAnom, xField: "LoggedTime", yValues: dataViewAnom, yFields: "Anomalous");
+    
+    myChart.AddSeries(chartType: "Line",
+                      xValue: dataView, xField: "LoggedTime",
+                      yValues: dataView, yFields: "Data");
+    myChart.AddSeries(chartType: "Column", xValue: empty, yValues: empty);
+    myChart.AddSeries(chartType: "Point", xValue: dataViewAnom, xField: "LoggedTime", yValues: dataViewAnom, yFields: "Anomalous");
     myChart.SetXAxis("Time");
     myChart.SetYAxis("" + ViewData["units"], minRecordedData - 5, maxRecordedData + 5);
+
     myChart.Write(); //direct output to screen
 }
-
