@@ -11,6 +11,7 @@
 
 <body>
     <h2>Project ID: <b>@ViewData["projectid"]</b> / Sensor ID: <b>@ViewData["sensorid"]</b> / Sensor Type: <b>@ViewData["type"]</b> / Site: <b>@ViewData["site"]</b></h2>
+    <br />
     <h4>Minimum Acceptable Reading: <b>@ViewData["min"]@ViewData["units"]</b> / Maximum Acceptable Reading: <b>@ViewData["max"]@ViewData["units"]</b></h4>
     <table class="table">
         <tr>
@@ -41,7 +42,14 @@
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.isAnomalous)
+                    @if(item.isAnomalous)
+                    {
+                        <img src="../../Image/Get/red-orb" width="20" height="20" />
+                    }
+                    else
+                    {
+                        <img src="../../Image/Get/green-orb" width="20" height="20" />
+                    }
                 </td>
             </tr>
         }

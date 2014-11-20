@@ -47,7 +47,7 @@
                 @Html.ActionLink("Table", "../Reading/Table", new { id = item.ID }, new { @class = "btn btn-default" })
             </td>
             <td>
-                @Html.ActionLink("Chart", "../Reading/Chart", new { id = item.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Chart", "../Reading/ChartDisplay", new { id = item.ID }, new { @class = "btn btn-default" })
             </td>
             <td>
                 @if (item.Status == Civionics.Models.SensorStatus.Alert)

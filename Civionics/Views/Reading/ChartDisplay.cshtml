@@ -1,0 +1,25 @@
+﻿@model Civionics.Models.Reading
+
+@{
+    ViewBag.Title = "ChartDisplay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Sensor Readings - Table</title>
+</head>
+
+<body>
+    <h3>Project ID: <b>@ViewData["projectid"]</b> / Sensor ID: <b>@ViewData["sensorid"]</b> / Sensor Type: <b>@ViewData["type"]</b> / Site: <b>@ViewData["site"]</b></h3>
+
+    <h4>Minimum Acceptable Reading: <b>@ViewData["min"]@ViewData["units"]</b> / Maximum Acceptable Reading: <b>@ViewData["max"]@ViewData["units"]</b></h4>
+
+    @Html.ActionLink("Back to List", "../Sensor/List/" + (string)Convert.ToString(ViewBag.projectid), null, new { @class = "btn btn-default" })
+    <br />
+
+    @{
+        string img_src_path = "../Chart/" + Convert.ToString(ViewBag.sensorid);
+        <img src=@img_src_path />
+    }
+    
+</body>

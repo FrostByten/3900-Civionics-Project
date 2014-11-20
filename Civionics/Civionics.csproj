@@ -266,6 +266,7 @@
     <Content Include="Views\Sensor\Edit.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Reading\ChartDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
