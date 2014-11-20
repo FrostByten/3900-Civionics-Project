@@ -5,38 +5,27 @@
     // Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{
-    /*      
-            ViewData.Add("projectid", s.ProjectID);
-            ViewData.Add("sensorid", s.ID);
-            ViewData.Add("units", s.Type.Units);
-            ViewData.Add("type", s.Type.Type);
-            ViewData.Add("min", s.MinSafeReading);
-            ViewData.Add("max", s.MaxSafeReading);
-            ViewData.Add("site", s.SiteID);
-     */
-}
-
 <head>
     <title>Sensor Readings - Table</title>
 </head>
 
 <body>
+    <h2>Project ID: <b>@ViewData["projectid"]</b> / Sensor ID: <b>@ViewData["sensorid"]</b> / Sensor Type: <b>@ViewData["type"]</b> / Site: <b>@ViewData["site"]</b></h2>
+    <h4>Minimum Acceptable Reading: <b>@ViewData["min"]@ViewData["units"]</b> / Maximum Acceptable Reading: <b>@ViewData["max"]@ViewData["units"]</b></h4>
     <table class="table">
         <tr>
             <th>
-                Sensor ID
+                Reading ID
             </th>
             <th>
                 Logged Time
             </th>
             <th>
-                Data
+                Data (in @ViewData["units"])
             </th>
             <th>
                 Is Anomalous
             </th>
-            <th></th>
         </tr>
 
         @foreach (var item in Model)

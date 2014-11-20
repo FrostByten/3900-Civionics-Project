@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Net;
 using Civionics.Models;
 using Civionics.DAL;
+using System.Web.Helpers;
 
 namespace Civionics.Controllers
 {
@@ -37,7 +38,7 @@ namespace Civionics.Controllers
             ViewData.Add("max", s.MaxSafeReading);
             ViewData.Add("site", s.SiteID);
 
-            return View(db.Readings.Where(k => k.SensorID == id).OrderByDescending(k => k.isAnomalous));
+            return View(db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID));
         }
 
         //
@@ -61,8 +62,9 @@ namespace Civionics.Controllers
             ViewData.Add("min", s.MinSafeReading);
             ViewData.Add("max", s.MaxSafeReading);
             ViewData.Add("site", s.SiteID);
-
-            return View(db.Readings.Where(k => k.SensorID == id).OrderByDescending(k => k.isAnomalous));
+            
+            return View(db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID));
         }
+
 	}
 }
