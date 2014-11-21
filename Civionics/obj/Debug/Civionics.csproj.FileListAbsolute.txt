@@ -350,3 +350,4 @@ C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Mi
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.csproj.GenerateResource.Cache
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.dll
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.pdb
+C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.addedserials.resources

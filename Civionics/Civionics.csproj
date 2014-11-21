@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201411060134206_adding-auto-ranging.Designer.cs">
       <DependentUpon>201411060134206_adding-auto-ranging.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411210149526_added-serials.cs" />
+    <Compile Include="Migrations\201411210149526_added-serials.Designer.cs">
+      <DependentUpon>201411210149526_added-serials.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\TypeModel.cs" />
@@ -286,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411060134206_adding-auto-ranging.resx">
       <DependentUpon>201411060134206_adding-auto-ranging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411210149526_added-serials.resx">
+      <DependentUpon>201411210149526_added-serials.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

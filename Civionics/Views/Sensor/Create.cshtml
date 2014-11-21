@@ -39,6 +39,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.serial, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.serial)
+                @Html.ValidationMessageFor(model => model.serial)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.MinSafeReading, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MinSafeReading)

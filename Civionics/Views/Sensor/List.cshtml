@@ -17,7 +17,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ID)
+            @Html.DisplayNameFor(model => model.serial)
         </th>
         <th>
             Table
@@ -41,7 +41,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ID)
+                @Html.DisplayFor(modelItem => item.serial)
             </td>
             <td>
                 @Html.ActionLink("Table", "../Reading/Table", new { id = item.ID }, new { @class = "btn btn-default" })

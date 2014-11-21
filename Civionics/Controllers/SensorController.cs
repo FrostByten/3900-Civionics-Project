@@ -94,6 +94,18 @@ namespace Civionics.Controllers
                 sensor.AutoPercent = 0;
             }
 
+            if(sensor.serial == null)
+            {
+                ModelState.AddModelError("", "Serial # is a required field");
+                return View(sensor);
+            }
+
+            if(!System.Text.RegularExpressions.Regex.IsMatch(sensor.serial, "([0-9][0-9]\\-){4}[0-9][0-9]"))
+            {
+                ModelState.AddModelError("", "Serial # should be in the format: ##-##-##-##-##");
+                return View(sensor);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Sensors.Add(sensor);
@@ -173,6 +185,7 @@ namespace Civionics.Controllers
             }
             ViewData.Add("sensorid", id);
             ViewData.Add("projectid", s.ProjectID.ToString());
+            ViewData.Add("serial", s.serial);
 
             return View(s);
         }
@@ -192,6 +205,7 @@ namespace Civionics.Controllers
             o.MinSafeReading = sensor.MinSafeReading;
             o.MaxSafeReading = sensor.MaxSafeReading;
             o.AutoRange = sensor.AutoRange;
+            o.serial = sensor.serial;
 
             if (sensor.AutoRange)
             {
@@ -213,6 +227,11 @@ namespace Civionics.Controllers
                 {
                     ModelState.AddModelError("", "Auto Percent should be a number between 0 and 99");
                     return View(o);
+                }
+                if(sensor.serial == null)
+                {
+                    ModelState.AddModelError("", "Serial # is a required field");
+                    return View(sensor);
                 }
 
                 db.SaveChanges();

@@ -50,6 +50,8 @@ namespace Civionics.Models
         public bool AutoRange { get; set; }
         [Display(Name = "Auto Percent")]
         public int AutoPercent { get; set; }
+        [Display(Name = "Serial #")]
+        public string serial { get; set; }
 
         public virtual SensorType Type { get; set; }
         public virtual Project Project { get; set; }
