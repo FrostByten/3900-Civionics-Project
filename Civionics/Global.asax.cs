@@ -86,20 +86,40 @@ namespace Civionics
         {
             bool handled = false;
 
-            System.Diagnostics.Debug.WriteLine("A new file was created at: " + e.FullPath + ".");
+            if(DEBUG)
+                System.Diagnostics.Debug.WriteLine("A new file was created at: " + e.FullPath + ".");
+
+            if (DEBUG)
+                System.Diagnostics.Debug.WriteLine("Handling file: " + e.Name);
+            
+            CivionicsContext db = new CivionicsContext();
+            //calculate what sensor serial should be
+            /*Sensor s = db.Sensors.Where(k => k.serial == blank).First();
+            if (s == null)
+            {
+                System.Diagnostics.Debug.WriteLine("No sensor with serial: " + serialhere + "!");
+                return;
+            }*/
+
+            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            p.StartInfo.FileName = "name of proc";
+            p.StartInfo.Arguments = "args here";
+            p.StartInfo.RedirectStandardOutput = true; //for debug
+            p.Start();
+            p.WaitForExit(); //for debug
+            System.Diagnostics.Debug.WriteLine(p.StandardOutput.ReadToEnd()); //for debug
 
             while (!handled)
             {
                 try
                 {
-                    //File handling logic goes here ---------------------------------------------------------------------------------------
                     //File.Delete(e.FullPath);
                     handled = true;
-                    System.Diagnostics.Debug.WriteLine("Handled file: " + e.Name);
                 }
                 catch(Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Error handling file: " + ex.Message + ". Retrying...");
+                    if(DEBUG)
+                        System.Diagnostics.Debug.WriteLine("Error handling file: " + ex.Message + ". Retrying...");
                 }
             }
         }

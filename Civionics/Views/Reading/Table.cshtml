@@ -10,9 +10,10 @@
 </head>
 
 <body>
-    <h2>Project: <b>@ViewData["projectname"]</b> / Serial #: <b>@ViewData["sensorserial"]</b> / Type: <b>@ViewData["type"]</b> / Site: <b>@ViewData["site"]</b></h2>
-    <br />
+    <h3>Project: <b>@ViewData["projectname"]</b> / Serial #: <b>@ViewData["sensorserial"]</b> / Type: <b>@ViewData["type"]</b> / Site: <b>@ViewData["site"]</b></h3>
     <h4>Minimum Acceptable Reading: <b>@ViewData["min"]@ViewData["units"]</b> / Maximum Acceptable Reading: <b>@ViewData["max"]@ViewData["units"]</b></h4>
+    @Html.ActionLink("Back to List", "../Sensor/List/" + (string)Convert.ToString(ViewBag.projectid), null, new { @class = "btn btn-default" })
+
     <table class="table">
         <tr>
             <th>

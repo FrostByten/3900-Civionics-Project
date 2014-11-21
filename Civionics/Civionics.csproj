@@ -203,6 +203,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-Civionics-20141031081608.mdf" />
+    <Content Include="App_Data\aspnet-Civionics-20141031081608_log.ldf">
+      <DependentUpon>aspnet-Civionics-20141031081608.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\CivionicsContext.mdf" />
     <Content Include="App_Data\CivionicsContext_log.ldf">
       <DependentUpon>CivionicsContext.mdf</DependentUpon>
