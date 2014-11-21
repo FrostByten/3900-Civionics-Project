@@ -37,6 +37,8 @@ namespace Civionics.Controllers
             ViewData.Add("min", s.MinSafeReading);
             ViewData.Add("max", s.MaxSafeReading);
             ViewData.Add("site", s.SiteID);
+            ViewData.Add("projectname", s.Project.Name);
+            ViewData.Add("sensorserial", s.serial);
 
             return View(db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID));
         }
@@ -62,6 +64,8 @@ namespace Civionics.Controllers
             ViewData.Add("min", s.MinSafeReading);
             ViewData.Add("max", s.MaxSafeReading);
             ViewData.Add("site", s.SiteID);
+            ViewData.Add("projectname", s.Project.Name);
+            ViewData.Add("sensorserial", s.serial);
 
             return View();
         }
@@ -87,6 +91,8 @@ namespace Civionics.Controllers
             ViewData.Add("min", s.MinSafeReading);
             ViewData.Add("max", s.MaxSafeReading);
             ViewData.Add("site", s.SiteID);
+            ViewData.Add("projectname", s.Project.Name);
+            ViewData.Add("sensorserial", s.serial);
             
             return View(db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID));
         }

@@ -10,10 +10,12 @@
     DataSet ds2 = new DataSet();
     DataSet ds3 = new DataSet();
     DataSet ds4 = new DataSet();
+    DataSet ds5 = new DataSet();
     DataTable dataTable = new DataTable("Table");
     DataTable dataTableAnom = new DataTable("TableAnom");
     DataTable dataTableMin = new DataTable("TableMin");
     DataTable dataTableMax = new DataTable("TableMax");
+    DataTable dataTableNotAnom = new DataTable("TableNotAnom");
 
     dataTable.Columns.Add("LoggedTime", typeof(string));
     dataTable.Columns.Add("Data", typeof(double));
@@ -23,11 +25,14 @@
     dataTableMin.Columns.Add("Min", typeof(double));
     dataTableMax.Columns.Add("LoggedTime", typeof(string));
     dataTableMax.Columns.Add("Max", typeof(double));
+    dataTableNotAnom.Columns.Add("LoggedTime", typeof(string));
+    dataTableNotAnom.Columns.Add("Data", typeof(double));
     
     dataSet.Tables.Add(dataTable);
     ds2.Tables.Add(dataTableAnom);
     ds3.Tables.Add(dataTableMin);
     ds4.Tables.Add(dataTableMax);
+    ds5.Tables.Add(dataTableNotAnom);
 
     double minRecordedData = double.MaxValue;
     double maxRecordedData = double.MinValue;
@@ -35,6 +40,7 @@
     {
         dataTable.Rows.Add(reading.LoggedTime.ToString(), reading.Data);
         dataTableAnom.Rows.Add(reading.LoggedTime, reading.isAnomalous ? reading.Data : Int32.MaxValue);
+        dataTableNotAnom.Rows.Add(reading.LoggedTime, reading.isAnomalous?Int32.MaxValue:reading.Data);
         dataTableMin.Rows.Add(reading.LoggedTime, ViewData["min"]);
         dataTableMax.Rows.Add(reading.LoggedTime, ViewData["max"]);
         minRecordedData = Math.Min(minRecordedData, reading.Data);
@@ -45,27 +51,31 @@
     var dataViewAnom = new DataView(ds2.Tables["TableAnom"]);
     var dataViewMin = new DataView(ds3.Tables["TableMin"]);
     var dataViewMax = new DataView(ds4.Tables["TableMax"]);
+    var dataViewNotAnom = new DataView(ds5.Tables["TableNotAnom"]);
     var empty = new DataView();
 
     var myChart = new Chart(width: 1000, height: 490, theme: ChartTheme.Green);
     
     //myChart.AddSeries(chartType: "Column", xValue: dataViewAnom, xField: "LoggedTime", yValues: dataViewAnom, yFields: "Anomalous");
     
-    myChart.AddSeries(chartType: "Line",
-                      xValue: dataView, xField: "LoggedTime",
-                      yValues: dataView, yFields: "Data");
+    myChart.AddSeries(chartType: "Line", xValue: dataView, xField: "LoggedTime", yValues: dataView, yFields: "Data");
     myChart.AddSeries(chartType: "Column", xValue: empty, yValues: empty);
     myChart.AddSeries(chartType: "Point", xValue: dataViewAnom, xField: "LoggedTime", yValues: dataViewAnom, yFields: "Anomalous");
+    
     for (int i = 0; i < 5; i ++ ) //Insert empty rows to change the colour of the next line... hackey but it works
     {
         myChart.AddSeries(chartType: "Column", xValue: empty, yValues: empty);
     }
+   
     myChart.AddSeries(chartType: "Line", xValue: dataViewMin, xField: "LoggedTime", yValues: dataViewMin, yFields: "Min");
+    
     for ( int i = 0; i < 8; i ++ )
     {
         myChart.AddSeries(chartType: "Column", xValue: empty, yValues: empty);
     }
+    
     myChart.AddSeries(chartType: "Line", xValue: dataViewMax, xField: "LoggedTime", yValues: dataViewMax, yFields: "Max");
+    myChart.AddSeries(chartType: "Point", xValue: dataViewNotAnom, xField: "LoggedTime", yValues: dataViewNotAnom, yFields: "Data");
     
     myChart.SetXAxis("Time");
     myChart.SetYAxis("" + ViewData["units"], minRecordedData - 5, maxRecordedData + 5);
