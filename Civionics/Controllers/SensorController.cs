@@ -63,7 +63,7 @@ namespace Civionics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent")] Sensor sensor)
+        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent, serial")] Sensor sensor)
         {
             List<String> list = new List<String>();
             List<SensorType> types = db.Types.ToList<SensorType>();
@@ -100,9 +100,9 @@ namespace Civionics.Controllers
                 return View(sensor);
             }
 
-            if(!System.Text.RegularExpressions.Regex.IsMatch(sensor.serial, "([0-9][0-9]\\-){4}[0-9][0-9]"))
+            if(!System.Text.RegularExpressions.Regex.IsMatch(sensor.serial, "^([0-9][0-9]\\-){3}[0-9][0-9]$"))
             {
-                ModelState.AddModelError("", "Serial # should be in the format: ##-##-##-##-##");
+                ModelState.AddModelError("", "Serial # should be in the format: ##-##-##-##");
                 return View(sensor);
             }
 
@@ -195,7 +195,7 @@ namespace Civionics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent")] Sensor sensor)
+        public ActionResult Edit([Bind(Include = "ID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent,serial")] Sensor sensor)
         {
             Sensor o = db.Sensors.Find(sensor.ID);
             if (o == null)
