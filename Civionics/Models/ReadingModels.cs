@@ -8,9 +8,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Civionics.Models
 {
     /// <summary>
-    /// Description:
-    ///     Represents the Reading table,
-    ///     which holds read data from a sensor
+    /// File: ReadingModels.cs
+    /// 
+    /// Created by: Sanders Lee
+    /// 
+    /// Class: Reading
     /// 
     /// Data Members:
     ///     int ID
@@ -18,6 +20,10 @@ namespace Civionics.Models
     ///     DateTime LoggedTime
     ///     int Data
     ///     Sensor sensor
+    /// 
+    /// Description:
+    ///     Represents the Reading table,
+    ///     which holds read data from a sensor
     /// </summary>
     public class Reading
     {
