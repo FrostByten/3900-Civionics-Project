@@ -10,6 +10,12 @@ namespace Civionics.Controllers
     {
         //
         // GET: /Image/Get/green-orb
+        /// <summary>
+        /// Returns the contents of the specified image file. If no such
+        /// file exists, returns 404
+        /// </summary>
+        /// <param name="id">The name of the image file to return</param>
+        /// <returns>The contents of the selected image file</returns>
         public ActionResult Get(string id)
         {
             var path = "/Images/" + id + ".png";

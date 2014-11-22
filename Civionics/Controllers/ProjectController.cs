@@ -30,6 +30,12 @@ namespace Civionics.Controllers
         public UserManager<ApplicationUser> UserManager { get; private set; }
 
         // GET: /Project/
+        /// <summary>
+        /// Gives a list of projects and associated data
+        /// Gives a list of all to admins, and
+        /// a list of permitted to users
+        /// </summary>
+        /// <returns>A list of project models</returns>
         public ActionResult Index()
         {
             if (User.Identity.Name == "admin")
@@ -43,6 +49,11 @@ namespace Civionics.Controllers
         }
 
         // GET: /Project/Details/5
+        /// <summary>
+        /// Gives the details of a particular project, based on the given id
+        /// </summary>
+        /// <param name="id">The id of the model to give details for</param>
+        /// <returns>The project with the specified id</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -58,14 +69,22 @@ namespace Civionics.Controllers
         }
 
         // GET: /Project/Create
+        /// <summary>
+        /// Displays the empty create page
+        /// </summary>
+        /// <returns>The view for the initial create page</returns>
         public ActionResult Create()
         {
             return View();
         }
 
         // POST: /Project/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="project">The project model returned from the create page</param>
+        /// <returns>If the model is valid, redirects to index. If model is invalid, 
+        /// returns the model to the create view and displays the associated error</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include="Name,Description")] Project project)
@@ -88,6 +107,12 @@ namespace Civionics.Controllers
         }
 
         // GET: /Project/Edit/5
+        /// <summary>
+        /// Displays the empty edit page filled with the uneditable values
+        /// </summary>
+        /// <param name="id">The id of the project to be edited</param>
+        /// <returns>The view for the initial edit page populated with
+        /// the values of the project</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -107,8 +132,12 @@ namespace Civionics.Controllers
         }
 
         // POST: /Project/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validates project data and edits projects based on user input
+        /// </summary>
+        /// <param name="project">The modified project model</param>
+        /// <returns>If invalid, re-display view with error. If valid,
+        /// redirect to index</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include="ID,Name,Description,Status,DateAdded")] Project project)
@@ -122,7 +151,12 @@ namespace Civionics.Controllers
             return View(project);
         }
 
-        // GET: /Project/Delete/5
+        // GET: Project/Delete/5
+        /// <summary>
+        /// Asks a user to confirm deletion of a project
+        /// </summary>
+        /// <param name="id">The id of the project to delete</param>
+        /// <returns>The confirmation view filled with the project data</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -138,6 +172,11 @@ namespace Civionics.Controllers
         }
 
         // POST: /Project/Delete/5
+        /// <summary>
+        /// Deletes a project after confirmation
+        /// </summary>
+        /// <param name="id">The id of the project to delete</param>
+        /// <returns>Redirects to index</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -152,6 +191,11 @@ namespace Civionics.Controllers
         }
 
         // GET: /Project/DeleteAccess/5
+        /// <summary>
+        /// Asks the user to confirm deletion of a project permission
+        /// </summary>
+        /// <param name="id">The id of the projectaccess to delete</param>
+        /// <returns>The delete view filled with the projectaccess data</returns>
         public ActionResult DeleteAccess(int? id)
         {
             if (id == null)
@@ -167,6 +211,11 @@ namespace Civionics.Controllers
         }
 
         // POST: /Project/DeleteAccess/5
+        /// <summary>
+        /// Deletes a projectaccess after confirmation
+        /// </summary>
+        /// <param name="id">The id of the projectaccess to delete</param>
+        /// <returns>Redirects to index</returns>
         [HttpPost, ActionName("DeleteAccess")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteAccessConfirmed(int id)
@@ -179,6 +228,11 @@ namespace Civionics.Controllers
         }
 
         // GET: /Project/Add/5
+        /// <summary>
+        /// Displays the projectaccess add view
+        /// </summary>
+        /// <param name="id">The project to create a projectaccess for</param>
+        /// <returns>Add view filled with the list of users</returns>
         public ActionResult Add(int? id)
         {
             ProjectAccess pa = new ProjectAccess();
@@ -195,6 +249,12 @@ namespace Civionics.Controllers
         }
 
         // POST: /Project/Add
+        /// <summary>
+        /// Adds a projectaccess after confirmation
+        /// </summary>
+        /// <param name="projectaccess">The projectaccess model to add to the database</param>
+        /// <returns>If invalid, returns the view and the associated error, if valid
+        /// redirects to index</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add([Bind(Include = "ProjectID, UserName")] ProjectAccess projectaccess)
@@ -226,6 +286,10 @@ namespace Civionics.Controllers
             return View(projectaccess);
         }
 
+        /// <summary>
+        /// Disposes of the database context
+        /// </summary>
+        /// <param name="disposing">Whether or not to dispose of the context</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
