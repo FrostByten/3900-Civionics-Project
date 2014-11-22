@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201411210149526_added-serials.Designer.cs">
       <DependentUpon>201411210149526_added-serials.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411222303477_InitialCrate.cs" />
+    <Compile Include="Migrations\201411222303477_InitialCrate.Designer.cs">
+      <DependentUpon>201411222303477_InitialCrate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\TypeModel.cs" />
@@ -297,6 +301,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411210149526_added-serials.resx">
       <DependentUpon>201411210149526_added-serials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411222303477_InitialCrate.resx">
+      <DependentUpon>201411222303477_InitialCrate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

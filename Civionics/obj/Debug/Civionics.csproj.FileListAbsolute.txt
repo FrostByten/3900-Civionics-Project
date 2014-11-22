@@ -351,3 +351,8 @@ C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.cs
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.dll
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.pdb
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.addedserials.resources
+C:\Users\MrChimick\Documents\3900-Civionics-Project\Civionics\bin\MVC Foolproof Validation.dll
+C:\Users\MrChimick\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.refactoring_sensor_type.resources
+C:\Users\MrChimick\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.addingautoranging.resources
+C:\Users\MrChimick\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.addedserials.resources
+C:\Users\MrChimick\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.InitialCrate.resources
