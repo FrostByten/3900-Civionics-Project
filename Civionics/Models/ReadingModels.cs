@@ -8,18 +8,6 @@ using System.ComponentModel.DataAnnotations;
 namespace Civionics.Models
 {
     /// <summary>
-<<<<<<< Updated upstream
-    /// Description:
-    ///     Represents the Reading table,
-    ///     which holds read data from a sensor
-    /// 
-    /// Data Members:
-    ///     int ID
-    ///     int SensorID
-    ///     DateTime LoggedTime
-    ///     int Data
-    ///     Sensor sensor
-=======
     /// File: ReadingModels.cs
     /// 
     /// Designed by: Michael Chimick
@@ -42,7 +30,6 @@ namespace Civionics.Models
     /// Description:
     ///     Represents the Reading table,
     ///     which holds read data from a sensor
->>>>>>> Stashed changes
     /// </summary>
     public class Reading
     {

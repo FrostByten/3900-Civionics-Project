@@ -14,19 +14,6 @@ namespace Civionics.Models
     }
 
     /// <summary>
-<<<<<<< Updated upstream
-    /// Description:
-    ///     Represents the Project table,
-    ///     which holds information on civil structure projects
-    /// 
-    /// Data Members:
-    ///     int ID
-    ///     string Name
-    ///     string Description
-    ///     ProjectStatus Status
-    ///     DateTime DateAdded
-    ///     ICollection Sensors
-=======
     /// File: ProjectModels.cs
     /// 
     /// Designed by: Michael Chimick
@@ -49,7 +36,6 @@ namespace Civionics.Models
     /// Description:
     ///     Represents the Project table,
     ///     which holds information on civil structure projects
->>>>>>> Stashed changes
     /// </summary>
     public class Project
     {

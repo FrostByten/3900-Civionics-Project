@@ -14,23 +14,6 @@ namespace Civionics.Models
     }
 
     /// <summary>
-<<<<<<< Updated upstream
-    /// Description:
-    ///     Represents the Sensor table,
-    ///     which holds information on the sensors themselves
-    /// 
-    /// Data Members:
-    ///     int SensorID
-    ///     int ProjectID
-    ///     string Type
-    ///     string Location
-    ///     string UnitOfMeasure
-    ///     SensorStatus Status
-    ///     int MinSafeReading
-    ///     int MaxSafeReading
-    ///     Project Project
-    ///     ICollection Readings
-=======
     /// File: SensorModels.cs
     /// 
     /// Designed by: Michael Chimick
@@ -60,7 +43,6 @@ namespace Civionics.Models
     /// Description:
     ///     Represents the Sensor table,
     ///     which holds information on the sensor devices
->>>>>>> Stashed changes
     /// </summary>
     public class Sensor
     {
