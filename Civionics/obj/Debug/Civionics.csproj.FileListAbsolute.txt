@@ -351,3 +351,4 @@ C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.cs
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.dll
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.pdb
 C:\Users\Lewis\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.addedserials.resources
+C:\Users\Sanders\Downloads\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.addedserials.resources
