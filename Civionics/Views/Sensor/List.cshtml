@@ -44,10 +44,10 @@
                 @Html.DisplayFor(modelItem => item.serial)
             </td>
             <td>
-                @Html.ActionLink("Table", "../Reading/Table", new { id = item.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Table", "../Reading/Table/" + item.ID + "/" + 35, null, new { @class = "btn btn-default" })
             </td>
             <td>
-                @Html.ActionLink("Chart", "../Reading/ChartDisplay", new { id = item.ID }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Chart", "../Reading/ChartDisplay/" + item.ID, null, new { @class = "btn btn-default" })
             </td>
             <td>
                 @if (item.Status == Civionics.Models.SensorStatus.Alert)

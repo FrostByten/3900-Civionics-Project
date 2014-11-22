@@ -25,7 +25,24 @@
 <body>
     <h3>Project: <b>@ViewData["projectname"]</b> / Serial #: <b>@ViewData["sensorserial"]</b> / Type: <b>@ViewData["type"]</b> / Site: <b>@ViewData["site"]</b></h3>
     <h4>Minimum Acceptable Reading: <b>@ViewData["min"]@ViewData["units"]</b> / Maximum Acceptable Reading: <b>@ViewData["max"]@ViewData["units"]</b></h4>
-    @Html.ActionLink("Back to List", "../Sensor/List/" + (string)Convert.ToString(ViewBag.projectid), null, new { @class = "btn btn-default" })
+    
+    <div class="row-fluid">
+        Number of entries: <input type="text" name="newnum" id="newnum" class="inline">
+        <button id="gobut" class="btn btn-default">Go</button>
+        @Html.ActionLink("Back to List", "../Sensor/List/" + (string)Convert.ToString(ViewBag.projectid), null, new { @class = "btn btn-default" })
+    </div>
+
+    <br />
+
+    <script>
+        var myBtn = document.getElementById('gobut');
+        myBtn.addEventListener('click', function (event) {
+            if (!isNaN($('#newnum').val()))
+            {
+                window.location = "../" + @ViewData["sensorid"] + "/" + $('#newnum').val();
+            }
+        });
+    </script>
 
     <table class="table">
         <tr>
@@ -56,13 +73,13 @@
                     @Html.DisplayFor(modelItem => item.Data)
                 </td>
                 <td>
-                    @if(item.isAnomalous)
+                    @if (item.isAnomalous)
                     {
-                        <img src="../../Image/Get/red-orb" width="20" height="20" />
+                        <img src="../../../Image/Get/red-orb" width="20" height="20" />
                     }
                     else
                     {
-                        <img src="../../Image/Get/green-orb" width="20" height="20" />
+                        <img src="../../../Image/Get/green-orb" width="20" height="20" />
                     }
                 </td>
             </tr>
