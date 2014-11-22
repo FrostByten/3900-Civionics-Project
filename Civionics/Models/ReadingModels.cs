@@ -19,7 +19,7 @@ namespace Civionics.Models
     ///     int Data
     ///     Sensor sensor
     /// </summary>
-    public class Reading // NOTE to self; refactor class
+    public class Reading
     {
         [Key]
         public int ID { get; set; }

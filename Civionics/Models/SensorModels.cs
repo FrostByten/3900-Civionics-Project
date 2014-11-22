@@ -43,9 +43,9 @@ namespace Civionics.Models
         public int TypeID { get; set; }
         public SensorStatus Status { get; set; }
         [Display(Name = "Minimum Safe Reading")]
-        public float MinSafeReading { get; set; } // Ask rishi if needs decimal
+        public float MinSafeReading { get; set; } 
         [Display(Name = "Maximum Safe Reading")]
-        public float MaxSafeReading { get; set; } // ^
+        public float MaxSafeReading { get; set; } 
         [Display(Name = "Auto-Range")]
         public bool AutoRange { get; set; }
         [Display(Name = "Auto Percent")]
