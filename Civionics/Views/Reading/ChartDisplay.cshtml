@@ -6,7 +6,7 @@
 }
 
 <head>
-    <title>Sensor Readings - Table</title>
+    <title>Sensor Readings - Chart</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
     <br />
 
     @{
-        string img_src_path = "../Chart/" + Convert.ToString(ViewBag.sensorid);
+        string img_src_path = "../Chart/" + Convert.ToString(ViewBag.sensorid) + "/5";
         <img src=@img_src_path />
     }
     

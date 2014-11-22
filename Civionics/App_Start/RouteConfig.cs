@@ -18,6 +18,11 @@ namespace Civionics
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "Extra Number",
+                url: "{controller}/{action}/{id}/{num}",
+                defaults: new { controller = "Reading", action = "Chart", id = UrlParameter.Optional, num = 30 }
+            );
         }
     }
 }
