@@ -13,11 +13,9 @@ namespace Civionics.Models
     }
 
     /// <summary>
-    /// File: SensorModels.cs
-    /// 
-    /// Created by: Sanders Lee
-    /// 
-    /// Class: Sensor
+    /// Description:
+    ///     Represents the Sensor table,
+    ///     which holds information on the sensors themselves
     /// 
     /// Data Members:
     ///     int SensorID
@@ -30,10 +28,6 @@ namespace Civionics.Models
     ///     int MaxSafeReading
     ///     Project Project
     ///     ICollection Readings
-    /// 
-    /// Description:
-    ///     Represents the Sensor table,
-    ///     which holds information on the sensors themselves
     /// </summary>
     public class Sensor
     {

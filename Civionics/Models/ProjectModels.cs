@@ -13,11 +13,9 @@ namespace Civionics.Models
     }
 
     /// <summary>
-    /// File: ProjectModels.cs
-    /// 
-    /// Created by: Sanders Lee
-    /// 
-    /// Class: Project
+    /// Description:
+    ///     Represents the Project table,
+    ///     which holds information on civil structure projects
     /// 
     /// Data Members:
     ///     int ID
@@ -26,10 +24,6 @@ namespace Civionics.Models
     ///     ProjectStatus Status
     ///     DateTime DateAdded
     ///     ICollection Sensors
-    ///     
-    /// Description:
-    ///     Represents the Project table,
-    ///     which holds information on civil structure projects
     /// </summary>
     public class Project
     {
