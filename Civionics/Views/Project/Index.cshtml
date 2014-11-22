@@ -7,7 +7,7 @@
 
 <h2>All Projects</h2>
 
-@if (User.Identity.Name == "admin")
+@if (User.IsInRole("admin"))
 {
     @Html.ActionLink("New Project", "Create", null, new { @class = "btn btn-default" })
 }
@@ -53,14 +53,14 @@
                 @Html.DisplayFor(modelItem => item.DateAdded)
             </td>
             <td>
-                @if (User.Identity.Name == "admin")
+                @if (User.IsInRole("admin"))
                 {
                     @Html.ActionLink("Edit Permissions", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
                 }
 
                 @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-default" })
 
-                @if (User.Identity.Name == "admin")
+                @if (User.IsInRole("admin"))
                 {
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-default" })
                 }

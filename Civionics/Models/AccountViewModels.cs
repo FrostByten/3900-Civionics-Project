@@ -26,6 +26,9 @@ namespace Civionics.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Admin")]
+        public bool isAdmin { get; set; }
     }
 
     public class LoginViewModel
@@ -59,5 +62,8 @@ namespace Civionics.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Admin")]
+        public bool isAdmin { get; set; }
     }
 }

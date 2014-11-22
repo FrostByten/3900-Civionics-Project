@@ -13,6 +13,18 @@ using Civionics.Models;
 
 namespace Civionics.Controllers
 {
+    public class userDisplay
+    {
+        public string user { get; set; }
+        public bool admin { get; set; }
+
+        public userDisplay(string u, bool a)
+        {
+            user = u;
+            admin = a;
+        }
+    }
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -24,15 +36,19 @@ namespace Civionics.Controllers
         public AccountController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;
+            RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
+        public RoleManager<IdentityRole> RoleManager { get; private set; }
 
         //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            //UserManager.AddToRole(UserManager.FindByName("admin").Id, "admin");
+
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Project");
 
@@ -86,6 +102,8 @@ namespace Civionics.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if(model.isAdmin)
+                        UserManager.AddToRole(user.Id, "admin");
                     return RedirectToAction("List", "Account");
                 }
                 else
@@ -312,15 +330,22 @@ namespace Civionics.Controllers
             List<ApplicationUser> list = dbc.Users.ToList();
             list.OrderBy(k => k.UserName);
 
-            List<string> names = new List<string>();
+            List<userDisplay> users = new List<userDisplay>();
             for(int i = 0; i < list.Count; i++)
             {
-                if(list[i].UserName != "admin")
-                    names.Add(list[i].UserName);
+                try
+                {
+                    if (list[i].UserName != User.Identity.Name)
+                        users.Add(new userDisplay(list[i].UserName, UserManager.IsInRole(list[i].Id, "admin")));
+                }
+                catch(Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine("Cannot find user: " + list[i].Id);
+                }
             }
             dbc.Dispose();
 
-            return View(names);
+            return View(users);
         }
 
         //
@@ -329,6 +354,10 @@ namespace Civionics.Controllers
         {
             ApplicationDbContext dbc = new ApplicationDbContext();
             ApplicationUser au = dbc.Users.Where(k => k.UserName == id).First();
+            if(User.Identity.GetUserId() == id)
+            {
+                return RedirectToAction("Index", "Project");
+            }
 
             return View(au);
         }

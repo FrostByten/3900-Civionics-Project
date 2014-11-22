@@ -1,4 +1,4 @@
-﻿@model IEnumerable<string>
+﻿@model IEnumerable<Civionics.Controllers.userDisplay>
 
 @{
     ViewBag.Title = "List";
@@ -17,6 +17,9 @@
             Username
         </th>
         <th>
+            Admin
+        </th>
+        <th>
             Delete
         </th>
     </tr>
@@ -25,10 +28,13 @@
     {
         <tr>
             <td>
-                @item
+                @item.user
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete/" + item, null, new { @class = "btn btn-default" })
+                @Html.DisplayFor(modelItem => item.admin)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete/" + item.user, null, new { @class = "btn btn-default" })
             </td>
         </tr>
     }

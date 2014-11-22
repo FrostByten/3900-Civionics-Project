@@ -7,7 +7,7 @@
 
 <h2>List of Sensors</h2>
 
-@if (User.Identity.Name == "admin")
+@if (User.IsInRole("admin"))
 {
     <p>
         @Html.ActionLink("Add New", "Create", new {id = ViewBag.projectid}, new {@class = "btn btn-default"})

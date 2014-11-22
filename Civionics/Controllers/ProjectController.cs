@@ -38,7 +38,7 @@ namespace Civionics.Controllers
         /// <returns>A list of project models</returns>
         public ActionResult Index()
         {
-            if (User.Identity.Name == "admin")
+            if (User.IsInRole("admin"))
             {
                 return View(db.Projects.OrderByDescending(k => k.Status));
             }
@@ -241,9 +241,20 @@ namespace Civionics.Controllers
             List<String> list = new List<String>();
             ApplicationDbContext dbc = new ApplicationDbContext();
             List<ApplicationUser> users = dbc.Users.ToList<ApplicationUser>();
-            users.Remove(users.Where(k => k.UserName == "admin").First());
+            List<ApplicationUser> torem = new List<ApplicationUser>();
 
-            ViewBag.userselect = new SelectList(users, "Username", "Username", pa.UserName);
+            for (int i = 0; i < users.Count; i++)
+            {
+                if (UserManager.IsInRole(users[i].Id, "admin"))
+                    torem.Add(users[i]);
+            }
+
+            for (int i = 0; i < torem.Count; i ++)
+            {
+                users.Remove(torem[i]);
+            }
+
+                ViewBag.userselect = new SelectList(users, "Username", "Username", pa.UserName);
 
             return View(pa);
         }
