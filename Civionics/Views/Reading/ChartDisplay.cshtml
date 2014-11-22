@@ -6,7 +6,7 @@
 }
 
 <head>
-    <title>Sensor Readings - Table</title>
+    <title>Sensor Readings - Chart</title>
 </head>
 
 <body>
@@ -14,12 +14,28 @@
 
     <h4>Minimum Acceptable Reading: <b>@ViewData["min"]@ViewData["units"]</b> / Maximum Acceptable Reading: <b>@ViewData["max"]@ViewData["units"]</b></h4>
 
-    @Html.ActionLink("Back to List", "../Sensor/List/" + (string)Convert.ToString(ViewBag.projectid), null, new { @class = "btn btn-default" })
+    <div class="row-fluid">
+        Number of entries: <input type="text" name="newnum" id="newnum" class="inline">
+        <button id="gobut" class="btn btn-default">Go</button>
+        @Html.ActionLink("Back to List", "../Sensor/List/" + (string)Convert.ToString(ViewBag.projectid), null, new { @class = "btn btn-default" })
+    </div>
+
+    <script>
+        var myBtn = document.getElementById('gobut');
+        myBtn.addEventListener('click', function (event) {
+            if (!isNaN($('#newnum').val()))
+            {
+                var newImage = document.getElementById("img");
+                newImage.src = newImage.src + "/../" + $('#newnum').val();
+            }
+        });
+    </script>
+
     <br />
 
     @{
-        string img_src_path = "../Chart/" + Convert.ToString(ViewBag.sensorid);
-        <img src=@img_src_path />
+        string img_src_path = "../Chart/" + Convert.ToString(ViewBag.sensorid) + "/5";
+        <img id="img" src=@img_src_path />
     }
     
 </body>

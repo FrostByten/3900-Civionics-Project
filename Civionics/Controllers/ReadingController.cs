@@ -18,9 +18,9 @@ namespace Civionics.Controllers
 
         //
         // GET: /Reading/Table
-        public ActionResult Table(int? id)
+        public ActionResult Table(int? id, int? num)
         {
-            if (id == null)
+            if (id == null || num == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -39,8 +39,20 @@ namespace Civionics.Controllers
             ViewData.Add("site", s.SiteID);
             ViewData.Add("projectname", s.Project.Name);
             ViewData.Add("sensorserial", s.serial);
+            ViewData.Add("num", num);
 
-            return View(db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID));
+            List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID).ToList();
+            if (list.Count < num)
+                return View(list);
+            else
+            {
+                List<Reading> o = new List<Reading>();
+                for (int i = 0; i < num; i++)
+                {
+                    o.Add(list[i]);
+                }
+                return View(o);
+            }
         }
 
         //
@@ -72,29 +84,32 @@ namespace Civionics.Controllers
 
         //
         // GET: /Reading/Chart
-        public ActionResult Chart(int? id)
+        public ActionResult Chart(int? id, int? num)
         {
-            if (id == null)
-            {
+            if (id == null || num == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            
             Sensor s = db.Sensors.Find(id);
-            if (s == null)
-            {
-                return HttpNotFound();
-            }
 
-            ViewData.Add("projectid", s.ProjectID);
-            ViewData.Add("sensorid", s.ID);
+            if (s == null)
+                return HttpNotFound();
+
             ViewData.Add("units", s.Type.Units);
-            ViewData.Add("type", s.Type.Type);
             ViewData.Add("min", s.MinSafeReading);
             ViewData.Add("max", s.MaxSafeReading);
-            ViewData.Add("site", s.SiteID);
-            ViewData.Add("projectname", s.Project.Name);
-            ViewData.Add("sensorserial", s.serial);
-            
-            return View(db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID));
+
+            List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID).ToList();
+            if(list.Count < num)
+                return View(list);
+            else
+            {
+                List<Reading> o = new List<Reading>();
+                for(int i = 0; i < num; i++)
+                {
+                    o.Add(list[i]);
+                }
+                return View(o);
+            }
         }
 
 	}
