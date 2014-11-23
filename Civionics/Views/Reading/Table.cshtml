@@ -27,7 +27,7 @@
     <h4>Minimum Acceptable Reading: <b>@ViewData["min"]@ViewData["units"]</b> / Maximum Acceptable Reading: <b>@ViewData["max"]@ViewData["units"]</b></h4>
     
     <div class="row-fluid">
-        Number of entries: <input type="text" name="newnum" id="newnum" class="inline">
+        Number of previous entries: <input type="text" name="newnum" id="newnum" class="inline">
         <button id="gobut" class="btn btn-default">Go</button>
         @Html.ActionLink("Back to List", "../Sensor/List/" + (string)Convert.ToString(ViewBag.projectid), null, new { @class = "btn btn-default" })
     </div>

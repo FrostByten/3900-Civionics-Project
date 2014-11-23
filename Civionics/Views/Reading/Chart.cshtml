@@ -1,11 +1,10 @@
 @model IEnumerable<Civionics.Models.Reading>
 @using System.Data;
-@using System.Web.UI.DataVisualization.Charting;
+
 
 @{
-    
-    
     ViewBag.Title = "Readings";
+    /*Layout = "~/Views/Shared/_Layout.cshtml";//
 
     System.Web.UI.DataVisualization.Charting.Chart chart 
         = new System.Web.UI.DataVisualization.Charting.Chart();
@@ -13,6 +12,9 @@
     chart.Width = 800;
     chart.Height = 600;
     chart.RenderType = RenderType.ImageTag;
+    chart.Palette = ChartColorPalette.BrightPastel;
+
+    Title t = new Title("");
     
     chart.ChartAreas.Add(new ChartArea());
     chart.Series.Add(new Series());
@@ -27,12 +29,7 @@
         DataPoint pt = chart.Series[0].Points[ptIdx];        
     }
     
-    StringWriter sw = new StringWriter();
-    HtmlTextWriter hw = new HtmlTextWriter(sw);
-    chart.RenderControl(hw);
-    
     // Layout = "~/Views/Shared/_Layout.cshtml";*/
-    /*
     DataSet dataSet = new DataSet();
     DataSet ds2 = new DataSet();
     DataSet ds3 = new DataSet();
@@ -109,3 +106,4 @@
 
     myChart.Write(); //direct output to screen*/
 }
+
