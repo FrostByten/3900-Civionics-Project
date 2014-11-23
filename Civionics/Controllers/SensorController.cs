@@ -33,6 +33,24 @@ namespace Civionics.Controllers
                 return HttpNotFound();
             }
 
+            ProjectAccess pa = null;
+            try
+            {
+                pa = db.ProjectAccesses.First(k => k.ProjectID == id && k.UserName == User.Identity.Name);
+            }
+            catch (Exception e) 
+            {
+                if(!User.IsInRole("admin"))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+            }
+
+            if (pa == null && !User.IsInRole("admin"))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             ViewData.Add("projectid", id);
 
             return View(db.Sensors.Where(k => k.ProjectID == id).OrderByDescending(k => k.Status));
