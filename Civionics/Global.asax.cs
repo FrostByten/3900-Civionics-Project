@@ -158,7 +158,7 @@ namespace Civionics
             CivionicsContext dbr = new CivionicsContext();
 
             if (DEBUG)
-                System.Diagnostics.Debug.WriteLine("Computing statuses.");
+                System.Diagnostics.Debug.WriteLine("\nComputing statuses.");
 
             List<Project> projlist = db.Projects.ToList();
 
@@ -199,6 +199,8 @@ namespace Civionics
                     projlev += sencount;
                     senstatus = (sencount > 0 ? (sencount > 2 ? SensorStatus.Alert : SensorStatus.Warning) : SensorStatus.Safe);
                     senslist[j].Status = senstatus;
+                    System.Diagnostics.Debug.WriteLine("\t Anomalous readings: " + sencount + "/" + readcount);
+                    System.Diagnostics.Debug.WriteLine("\t Computed Status: " + senstatus.ToString());
 
                     if (senslist[j].AutoRange)
                     {
@@ -226,7 +228,7 @@ namespace Civionics
             dbr.SaveChanges();
 
             if (DEBUG)
-                System.Diagnostics.Debug.WriteLine("Finished computing statuses.");
+                System.Diagnostics.Debug.WriteLine("Finished computing statuses.\n");
         }
 
         static void purge(int length = PURGE_OFFSET)
