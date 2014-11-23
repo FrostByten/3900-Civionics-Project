@@ -191,7 +191,9 @@ namespace Civionics.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult New_Type([Bind(Include = "Type, Units")] SensorType sensortype)
         {
-            if (ModelState.IsValid)
+            List<SensorType> s = db.Types.Where(k => k.Type.Equals(sensortype.Type)).ToList();
+
+            if (ModelState.IsValid && s.Count == 0)
             {
                 db.Types.Add(sensortype);
                 db.SaveChanges();
