@@ -41,9 +41,9 @@ namespace Civionics.Controllers
             ViewData.Add("sensorserial", s.serial);
             ViewData.Add("num", num);
 
-            List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID).ToList();
+            List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderByDescending(k => k.ID).ToList();
             if (list.Count < num)
-                return View(list);
+                return View(list.OrderBy(k => k.LoggedTime));
             else
             {
                 List<Reading> o = new List<Reading>();
@@ -51,7 +51,7 @@ namespace Civionics.Controllers
                 {
                     o.Add(list[i]);
                 }
-                return View(o);
+                return View(o.OrderBy(k => k.LoggedTime));
             }
         }
 
@@ -98,9 +98,9 @@ namespace Civionics.Controllers
             ViewData.Add("min", s.MinSafeReading);
             ViewData.Add("max", s.MaxSafeReading);
 
-            List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID).ToList();
+            List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderByDescending(k => k.ID).ToList();
             if(list.Count < num)
-                return View(list);
+                return View(list.OrderBy(k => k.LoggedTime));
             else
             {
                 List<Reading> o = new List<Reading>();
@@ -108,7 +108,7 @@ namespace Civionics.Controllers
                 {
                     o.Add(list[i]);
                 }
-                return View(o);
+                return View(o.OrderBy(k => k.LoggedTime));
             }
         }
 
