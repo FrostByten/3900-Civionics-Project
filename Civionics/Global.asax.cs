@@ -84,44 +84,42 @@ namespace Civionics
 
         static void watcher_Created(object sender, FileSystemEventArgs e)
         {
-            bool handled = false;
-
             if(DEBUG)
                 System.Diagnostics.Debug.WriteLine("A new file was created at: " + e.FullPath + ".");
+
+            char[] delim = { '.' };
+            string ext = e.Name.Split(delim)[1];
+
+            if(!(ext == "xls" || ext == "xlsx"))
+            {
+                if(DEBUG)
+                    System.Diagnostics.Debug.WriteLine("File is not an excel file... bailing...");
+                return;
+            }
 
             if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Handling file: " + e.Name);
             
             CivionicsContext db = new CivionicsContext();
-            //calculate what sensor serial should be
-            /*Sensor s = db.Sensors.Where(k => k.serial == blank).First();
-            if (s == null)
-            {
-                System.Diagnostics.Debug.WriteLine("No sensor with serial: " + serialhere + "!");
-                return;
-            }*/
 
             System.Diagnostics.Process p = new System.Diagnostics.Process();
-            p.StartInfo.FileName = "name of proc";
-            p.StartInfo.Arguments = "args here";
-            p.StartInfo.RedirectStandardOutput = true; //for debug
-            p.Start();
+            p.StartInfo.FileName = "C:\\Program Files\\Java\\jre7\\bin\\java.exe";
+            p.StartInfo.Arguments = "-jar C:/mvctest.jar";
+            //p.StartInfo.Arguments = "-version"; //for debug
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.UseShellExecute = false;
+
+            try { p.Start(); }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Java might not installed, exception: " + ex.Message);
+                return;
+            }
+
             p.WaitForExit(); //for debug
             System.Diagnostics.Debug.WriteLine(p.StandardOutput.ReadToEnd()); //for debug
-
-            while (!handled)
-            {
-                try
-                {
-                    //File.Delete(e.FullPath);
-                    handled = true;
-                }
-                catch(Exception ex)
-                {
-                    if(DEBUG)
-                        System.Diagnostics.Debug.WriteLine("Error handling file: " + ex.Message + ". Retrying...");
-                }
-            }
+            System.Diagnostics.Debug.WriteLine(p.StandardError.ReadToEnd()); //for debug
         }
 
         static void status_loop()
