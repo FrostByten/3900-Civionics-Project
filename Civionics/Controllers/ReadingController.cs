@@ -14,12 +14,34 @@ using System.Web.UI.DataVisualization.Charting;
 using System.Drawing;
 
 namespace Civionics.Controllers
-{
+{   
+    /// <summary>
+    /// File: ReadingController.cs
+    /// 
+    /// Created by: Lewis Scott
+    /// Edited by: Sanders Lee
+    /// 
+    /// Class: ReadingController
+    /// 
+    /// Data Members:
+    ///     CivionicsContext db     // accesses the database
+    /// 
+    /// Methods:
+    ///     ActionResult Table(int? id, int? num)   // displays a page with the data in a table
+    ///     ActionResult ChartDisplay(int? id)      // displays a page with the data in a graph
+    ///     ActionResult Chart(int? id, int? num)   // produces a graph from the data
+    /// 
+    /// Description:
+    ///     Displays the data from a sensor in two different formats, each in a separate page.
+    /// </summary> 
     public class ReadingController : Controller
     {
         private CivionicsContext db = new CivionicsContext();
 
         // GET: /Reading/Table
+        /// <author>
+        /// Lewis Scott
+        /// </author>
         /// <summary>
         /// Gets a given number of readings in date order since before now
         /// for a given sensor
@@ -65,6 +87,9 @@ namespace Civionics.Controllers
         }
 
         // GET: /Reading/ChartDisplay
+        /// <author>
+        /// Lewis Scott
+        /// </author>
         /// <summary>
         /// Displays the view filled with data relevant to the given sensor
         /// </summary>
@@ -96,6 +121,9 @@ namespace Civionics.Controllers
         }
 
         // GET: /Reading/Chart
+        /// <author>
+        /// Sanders Lee
+        /// </author>
         /// <summary>
         /// Renders the graph of a sensor's data
         /// </summary>
@@ -146,7 +174,7 @@ namespace Civionics.Controllers
             // data point highlight
             chart.Series[3].ChartType = SeriesChartType.Point;
             chart.Series[3].MarkerSize = 10;
-            //chart.Series[5].ChartType = SeriesChartType.Bar; // time period division
+            
 
             // set the graph data, and only get the specified number of most recent points
             List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID).ToList();
@@ -169,6 +197,7 @@ namespace Civionics.Controllers
                 chart.Series[2].Points.AddXY(x, s.MinSafeReading); // lower limit line
                 chart.Series[3].Points.AddXY(x, y); // data points
 
+                // color the points differently depending on abnormality
                 if (y < s.MinSafeReading || y > s.MaxSafeReading)
                     chart.Series[3].Points[(int)num - i - 1].Color = Color.Red;
                 else
