@@ -273,7 +273,6 @@
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Add.cshtml" />
     <Content Include="Views\Project\DeleteAccess.cshtml" />
-    <Content Include="Views\Reading\Chart.cshtml" />
     <Content Include="Views\Reading\Table.cshtml" />
     <Content Include="Views\Sensor\List.cshtml" />
     <Content Include="Views\Sensor\Create.cshtml" />

@@ -155,6 +155,10 @@ namespace Civionics.Controllers
             if (list.Count == 0)
                 return null;
 
+            // cannot grab more data points than there is
+            if (num > list.Count)
+                num = list.Count;
+
             for (int i = (int)num - 1; i >=0; i--)
             {
                 string x = list[list.Count - i - 1].LoggedTime.ToString();
