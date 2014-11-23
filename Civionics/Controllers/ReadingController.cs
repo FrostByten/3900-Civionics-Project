@@ -16,8 +16,14 @@ namespace Civionics.Controllers
     {
         private CivionicsContext db = new CivionicsContext();
 
-        //
         // GET: /Reading/Table
+        /// <summary>
+        /// Gets a given number of readings in date order since before now
+        /// for a given sensor
+        /// </summary>
+        /// <param name="id">The id of the sensor to get readings for</param>
+        /// <param name="num">The number of readings to return</param>
+        /// <returns>The view filled with readings from the sensor</returns>
         public ActionResult Table(int? id, int? num)
         {
             if (id == null || num == null)
@@ -55,8 +61,12 @@ namespace Civionics.Controllers
             }
         }
 
-        //
         // GET: /Reading/ChartDisplay
+        /// <summary>
+        /// Displays the view filled with data relevant to the given sensor
+        /// </summary>
+        /// <param name="id">The id of the sensor to get data for</param>
+        /// <returns>The View filled with data relevant to the given sensor</returns>
         public ActionResult ChartDisplay(int? id)
         {
             if (id == null)
@@ -82,8 +92,13 @@ namespace Civionics.Controllers
             return View();
         }
 
-        //
         // GET: /Reading/Chart
+        /// <summary>
+        /// Gives a given number of readings in order for a given sensor
+        /// </summary>
+        /// <param name="id">The id of the sensor to get readings for</param>
+        /// <param name="num">The number of readings to get</param>
+        /// <returns>The View filled with readings from the sensor</returns>
         public ActionResult Chart(int? id, int? num)
         {
             if (id == null || num == null)

@@ -15,8 +15,12 @@ namespace Civionics.Controllers
     {
         private CivionicsContext db = new CivionicsContext();
 
-        //
         // GET: /Sensor/List
+        /// <summary>
+        /// Gets a list of sensors for a given project
+        /// </summary>
+        /// <param name="id">The id of the project to get sensors for</param>
+        /// <returns>The View filled with sensors</returns>
         public ActionResult List(int? id)
         {
             if (id == null)
@@ -35,6 +39,11 @@ namespace Civionics.Controllers
         }
 
         // GET: /Sensor/Create
+        /// <summary>
+        /// Gets the initial create page
+        /// </summary>
+        /// <param name="id">The id to create a sensor for</param>
+        /// <returns>The View filled with all the different types</returns>
         public ActionResult Create(int? id)
         {
             Project p = db.Projects.Find(id);
@@ -59,11 +68,15 @@ namespace Civionics.Controllers
         }
 
         // POST: /Sensor/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validates user input and creates a sensor based on it
+        /// </summary>
+        /// <param name="sensor">The model containing the user-inputted information</param>
+        /// <returns>The old View if data is invalid, otherwise redirects to the
+        /// sensor list</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent, serial")] Sensor sensor)
+        public ActionResult Create([Bind(Include = "ProjectID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent,serial")] Sensor sensor)
         {
             List<String> list = new List<String>();
             List<SensorType> types = db.Types.ToList<SensorType>();
@@ -118,6 +131,11 @@ namespace Civionics.Controllers
         }
 
         // GET: /Sensor/Delete/5
+        /// <summary>
+        /// Confirms with the user that they really want to delete a sensor
+        /// </summary>
+        /// <param name="id">The id of the sensor to delete</param>
+        /// <returns>The View filled with information about the selected sensor</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -136,6 +154,11 @@ namespace Civionics.Controllers
         }
 
         // POST: /Project/Delete/5
+        /// <summary>
+        /// Deletes a sensor and all associated readings
+        /// </summary>
+        /// <param name="id">The id of the sensor to delete</param>
+        /// <returns>Redirects to the project listing</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -148,14 +171,22 @@ namespace Civionics.Controllers
         }
 
         // GET: /Sensor/New_Type
+        /// <summary>
+        /// Displays the page for creating a new sensor type
+        /// </summary>
+        /// <returns>The View</returns>
         public ActionResult New_Type()
         {
             return View();
         }
 
         // POST: /Sensor/New_Type
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validates user input and creates a new sensor type based on it
+        /// </summary>
+        /// <param name="sensortype">The user inputted data</param>
+        /// <returns>If invalid, returns the View with the old user data.
+        /// Else, redirects to the project list</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult New_Type([Bind(Include = "Type, Units")] SensorType sensortype)
@@ -171,6 +202,11 @@ namespace Civionics.Controllers
         }
 
         // GET: /Sensor/Edit/5
+        /// <summary>
+        /// Displays the edit page filled with all un-editable data
+        /// </summary>
+        /// <param name="id">The id of the sensor to edit</param>
+        /// <returns>The view for editing</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -191,8 +227,12 @@ namespace Civionics.Controllers
         }
 
         // POST: /Sensor/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Validates user data and edits a sensor based on it
+        /// </summary>
+        /// <param name="sensor">The user data</param>
+        /// <returns>If data is invalid, returns the View filled with
+        /// the old user data, otherwise, redirects to the project list</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,TypeID,SiteID,MinSafeReading,MaxSafeReading,AutoRange,AutoPercent,serial")] Sensor sensor)

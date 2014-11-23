@@ -47,8 +47,6 @@ namespace Civionics.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            //UserManager.AddToRole(UserManager.FindByName("admin").Id, "admin");
-
             if (User.Identity.IsAuthenticated)
                 return RedirectToAction("Index", "Project");
 
@@ -322,8 +320,11 @@ namespace Civionics.Controllers
             return View();
         }
 
-        //
         // GET: /Account/List
+        /// <summary>
+        /// Lists the accounts in the system except the current user
+        /// </summary>
+        /// <returns>The view filled with all user accounts except the current user</returns>
         public ActionResult List()
         {
             ApplicationDbContext dbc = new ApplicationDbContext();
@@ -348,8 +349,12 @@ namespace Civionics.Controllers
             return View(users);
         }
 
-        //
         // GET: /Account/Delete
+        /// <summary>
+        /// Prompts a user to confirm the deletion of another user
+        /// </summary>
+        /// <param name="id">The id of the user to delete</param>
+        /// <returns>The View filled with data about the user</returns>
         public ActionResult Delete(string id)
         {
             ApplicationDbContext dbc = new ApplicationDbContext();
@@ -362,8 +367,12 @@ namespace Civionics.Controllers
             return View(au);
         }
 
-        //
         // POST: /Account/Delete
+        /// <summary>
+        /// Deletes a user account
+        /// </summary>
+        /// <param name="au">The user account to delete</param>
+        /// <returns>Redirects to the user list</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(ApplicationUser au)
