@@ -359,3 +359,4 @@ C:\Users\MrChimick\Documents\3900-Civionics-Project\Civionics\obj\Debug\Civionic
 C:\Users\Sanders\Downloads\3900-Civionics-Project\Civionics\bin\System.Web.DataVisualization.dll
 C:\Users\Sanders\Downloads\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.addedserials.resources
 C:\Users\Sanders\Downloads\3900-Civionics-Project\Civionics\obj\Debug\Civionics.Migrations.InitialCrate.resources
+C:\Users\MrChimick\Documents\3900-Civionics-Project\Civionics\bin\System.Web.DataVisualization.dll

@@ -35,7 +35,7 @@
     <script>
         var myBtn = document.getElementById('gobut');
         myBtn.addEventListener('click', function (event) {
-            if (!isNaN($('#newnum').val()))
+            if ((!isNaN($('#newnum').val())) && ($('#newnum').val() > 0))
             {
                 var newImage = document.getElementById("img");
                 newImage.src = newImage.src + "/../" + $('#newnum').val();
