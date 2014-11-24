@@ -40,11 +40,13 @@ namespace Civionics.Controllers
         {
             if (User.IsInRole("admin"))
             {
-                return View(db.Projects.OrderByDescending(k => k.Status));
+                List<Project> l = db.Projects.OrderBy(k => k.Name).ToList();
+                return View(l.OrderByDescending(k => k.Status));
             }
             else
             {
-                return View(db.Projects.Where(k=>db.ProjectAccesses.Any(j=>j.ProjectID==k.ID && j.UserName == User.Identity.Name)).OrderByDescending(k => k.Status));
+                List<Project> l = db.Projects.Where(k=>db.ProjectAccesses.Any(j=>j.ProjectID==k.ID && j.UserName == User.Identity.Name)).OrderBy(k => k.Name).ToList();
+                return View(l.OrderByDescending(k => k.Status));
             }
         }
 
