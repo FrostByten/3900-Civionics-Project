@@ -143,8 +143,11 @@ namespace Civionics.Controllers
             System.Web.UI.DataVisualization.Charting.Chart chart =
                 new System.Web.UI.DataVisualization.Charting.Chart();
 
-            chart.Width = 1400;
-            chart.Height = 800;
+            chart.Width = 1100;
+            chart.Height = 470;
+            chart.AntiAliasing = System.Web.UI.DataVisualization.Charting.AntiAliasingStyles.Graphics;
+            chart.BackImageTransparentColor = System.Drawing.Color.Transparent;
+            chart.BackColor = System.Drawing.Color.Transparent;
             chart.ChartAreas.Add(new ChartArea());
 
             // label the axes
@@ -152,6 +155,8 @@ namespace Civionics.Controllers
             chart.ChartAreas[0].AxisX.TitleFont = new Font("Arial", 12f, FontStyle.Bold);
             chart.ChartAreas[0].AxisY.Title = s.Type.Type + " (" + s.Type.Units + ")";
             chart.ChartAreas[0].AxisY.TitleFont = new Font("Arial", 12f, FontStyle.Bold);
+            chart.ChartAreas[0].BackImageTransparentColor = System.Drawing.Color.Transparent;
+            chart.ChartAreas[0].BackColor = System.Drawing.Color.Transparent;
 
             for (int i = 0; i < 4; i++)
                 chart.Series.Add(new Series());
