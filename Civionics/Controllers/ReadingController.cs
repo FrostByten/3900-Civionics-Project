@@ -184,9 +184,14 @@ namespace Civionics.Controllers
             // set the graph data, and only get the specified number of most recent points
             List<Reading> list = db.Readings.Where(k => k.SensorID == id).OrderBy(k => k.ID).ToList();
 
-            // no data == no image
+            // no data == empty image
             if (list.Count == 0)
-                return null;
+            {
+                Bitmap image = new Bitmap(1, 1);
+                MemoryStream ms = new MemoryStream();
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return File(ms.ToArray(), "image/png");
+            }
 
             // cannot grab more data points than there is
             if (num > list.Count)
