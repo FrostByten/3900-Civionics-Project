@@ -211,7 +211,7 @@ namespace Civionics.Controllers
                 if (y < s.MinSafeReading || y > s.MaxSafeReading)
                     chart.Series[3].Points[(int)num - i - 1].Color = Color.Red;
                 else
-                    chart.Series[3].Points[(int)num - i - 1].Color = Color.Aqua;
+                    chart.Series[3].Points[(int)num - i - 1].Color = Color.LawnGreen;
             }
 
             // labelling the max and min lines

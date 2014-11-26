@@ -35,6 +35,8 @@ namespace Civionics
         public const int PROJECT_WARNING_LEVEL = 3; //The amount of sensor weights before a project has a warning
         public const int PROJECT_ALERT_LEVEL = 9; //The amount of sensor weights before a project has an alert
 
+        public const int MIN_READINGS = 4;
+
         private static DateTime last;
         private static string dir;
 
@@ -181,28 +183,34 @@ namespace Civionics
                     SensorStatus senstatus = SensorStatus.Safe;
                     List<Reading> readlist = dbr.Readings.ToList().Where(r => (r.SensorID == senslist[j].ID) && (r.LoggedTime > last)).ToList().OrderByDescending(r => r.LoggedTime).ToList();
 
-                    int readcount = 0;
+                    int readcount = readlist.Count;
                     float readavg = 0;
 
-                    for (int k = 0; k < readlist.Count; k++)
+                    for (int k = 0; k < readcount; k++)
                     {
                         if(DEBUG)
                             System.Diagnostics.Debug.WriteLine("\t\tReading: " + readlist[k].ID + ", Date: " + readlist[k].LoggedTime);
                         if (readlist[k].isAnomalous)
                             sencount++;
                         totcount++;
-                        readcount++;
                         readavg += readlist[k].Data;
                     }
 
                     readavg = readavg / readcount;
                     projlev += sencount;
                     senstatus = (sencount > 0 ? (sencount > 2 ? SensorStatus.Alert : SensorStatus.Warning) : SensorStatus.Safe);
-                    senslist[j].Status = senstatus;
-                    System.Diagnostics.Debug.WriteLine("\t Anomalous readings: " + sencount + "/" + readcount);
-                    System.Diagnostics.Debug.WriteLine("\t Computed Status: " + senstatus.ToString());
 
-                    if (senslist[j].AutoRange)
+                    if (readcount >= MIN_READINGS)
+                    {
+                        senslist[j].Status = senstatus;
+                        System.Diagnostics.Debug.WriteLine("\t Anomalous readings: " + sencount + "/" + readcount);
+                        System.Diagnostics.Debug.WriteLine("\t Computed Status: " + senstatus.ToString());
+                    }
+                    else
+                        System.Diagnostics.Debug.WriteLine("\t Not enough recent readings to compute sensor status: "  + readcount);
+
+
+                    if (senslist[j].AutoRange && readcount >= MIN_READINGS)
                     {
                         senslist[j].MaxSafeReading = readavg * (1 + senslist[j].AutoPercent);
                         senslist[j].MinSafeReading = readavg * (-1 * (1 + (senslist[j].AutoPercent)));
@@ -211,7 +219,6 @@ namespace Civionics
 
                 if (totcount == 0)
                     projlist[i].Status = ProjectStatus.Safe;
-
                 else
                 {
                     int total = (projlev / totcount);
