@@ -48,7 +48,7 @@
     <table class="table">
         <tr>
             <th>
-                Reading ID
+                Number
             </th>
             <th>
                 Logged Time
@@ -60,12 +60,12 @@
                 Is Anomalous
             </th>
         </tr>
-
+        @{ViewData["i"] = 1;}
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ID)
+                    @ViewData["i"]
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LoggedTime)
@@ -84,6 +84,7 @@
                     }
                 </td>
             </tr>
+            ViewData["i"] = (int)ViewData["i"] + 1;
         }
     </table>
 </body>
