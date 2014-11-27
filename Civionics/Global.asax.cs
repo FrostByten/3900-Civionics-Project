@@ -25,6 +25,8 @@ namespace Civionics
         public const int PURGE_PERIOD = 24; //How often the server purges old data from the database (in hours)
 
         public const string WATCH_PATH = "\\Dropbox\\"; //The path to probe when watching
+        public const string JAVA_PATH = "\\Java\\"; //The path to the java folder
+        public const string JAVA_JAR = "dbinsert.jar"; //The name of the dbinsert jar file
 
         public const int PURGE_OFFSET = 15; //Purge offset from today in days
 
@@ -39,6 +41,7 @@ namespace Civionics
 
         private static DateTime last;
         private static string dir;
+        private static string java_dir;
 
         /// <summary>
         /// This function acts as the main entry point for the server.
@@ -56,6 +59,7 @@ namespace Civionics
             FileSystemWatcher watcher;
 
             dir = Directory.GetCurrentDirectory() + WATCH_PATH;
+            java_dir = Directory.GetCurrentDirectory() + JAVA_PATH;
 
             if(!Directory.Exists(dir))
             {
@@ -115,12 +119,17 @@ namespace Civionics
 
             if (DEBUG)
                 System.Diagnostics.Debug.WriteLine("Handling file: " + e.Name);
-            
-            CivionicsContext db = new CivionicsContext();
+
+            if(!Directory.Exists(java_dir))
+            {
+                if(DEBUG)
+                    System.Diagnostics.Debug.WriteLine("Directory: " + java_dir.ToString() + " does not exist...\nFailed to parse file: " + e.Name);
+                return;
+            }
 
             System.Diagnostics.Process p = new System.Diagnostics.Process();
             p.StartInfo.FileName = "C:\\Program Files\\Java\\jre7\\bin\\java.exe";
-            p.StartInfo.Arguments = "-jar C:/mvctest.jar";
+            p.StartInfo.Arguments = "-jar " + java_dir.ToString() + JAVA_JAR;
             //p.StartInfo.Arguments = "-version"; //for debug
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.RedirectStandardOutput = true;
@@ -133,9 +142,9 @@ namespace Civionics
                 return;
             }
 
-            p.WaitForExit(); //for debug
-            System.Diagnostics.Debug.WriteLine(p.StandardOutput.ReadToEnd()); //for debug
-            System.Diagnostics.Debug.WriteLine(p.StandardError.ReadToEnd()); //for debug
+            //p.WaitForExit(); //for debug
+            //System.Diagnostics.Debug.WriteLine(p.StandardOutput.ReadToEnd()); //for debug
+            //System.Diagnostics.Debug.WriteLine(p.StandardError.ReadToEnd()); //for debug
         }
 
         /// <summary>
