@@ -17,7 +17,7 @@ namespace Civionics
     {
         public static CivionicsContext db = new CivionicsContext();
 
-        public const bool DEBUG = true;
+        public const bool DEBUG = true; //Whether or not to print out debug messages
 
         public const int START_DELAY = 60; //The delay (in seconds) to wait after application startup to launch the task threads
         public const int WATCH_PERIOD = 60; //How often the watch thread should check a folder (in seconds)
@@ -35,11 +35,17 @@ namespace Civionics
         public const int PROJECT_WARNING_LEVEL = 3; //The amount of sensor weights before a project has a warning
         public const int PROJECT_ALERT_LEVEL = 9; //The amount of sensor weights before a project has an alert
 
-        public const int MIN_READINGS = 4;
+        public const int MIN_READINGS = 4; //The minimum number of recent readings required to compute status for a sensor
 
         private static DateTime last;
         private static string dir;
 
+        /// <summary>
+        /// This function acts as the main entry point for the server.
+        /// 
+        /// It launches the directory watcher, as well as the status
+        /// and purge threads.
+        /// </summary>
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -84,6 +90,14 @@ namespace Civionics
             System.Diagnostics.Debug.WriteLine("System ready...\n");
         }
 
+        /// <summary>
+        /// This function is called when a new file is created in the filesystem.
+        /// 
+        /// It filters the only excel files, then calls the associated java application
+        /// that will open the file and insert it's values into the database.
+        /// </summary>
+        /// <param name="sender">The filesystemwatcher object that sent the event</param>
+        /// <param name="e">The event that was broadcast</param>
         static void watcher_Created(object sender, FileSystemEventArgs e)
         {
             if(DEBUG)
@@ -124,6 +138,11 @@ namespace Civionics
             System.Diagnostics.Debug.WriteLine(p.StandardError.ReadToEnd()); //for debug
         }
 
+        /// <summary>
+        /// This is the entry-point for the status thread.
+        /// 
+        /// Loops forever: computes statuses and then waits
+        /// </summary>
         static void status_loop()
         {
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 5)); // Wait for the system to start
@@ -138,6 +157,11 @@ namespace Civionics
             }
         }
 
+        /// <summary>
+        /// This is the entry-point for the purge thread.
+        /// 
+        /// Loops forever: purges and then waits
+        /// </summary>
         static void purge_loop()
         {
             System.Threading.Thread.Sleep(TimeSpan.FromSeconds(START_DELAY + 10)); // Wait for the system to start
@@ -152,6 +176,15 @@ namespace Civionics
             }
         }
 
+        /// <summary>
+        /// Calculates the statuses for each project and sensor.
+        /// 
+        /// For every project, computes the status for each sensor, then
+        /// uses the average status to compute the status for the project.
+        /// 
+        /// For every sensor, computes the status based on the average
+        /// number of recent readings that were anomalous.
+        /// </summary>
         static void calculate_status()
         {
             last = DateTime.Now;
@@ -217,9 +250,7 @@ namespace Civionics
                     }
                 }
 
-                if (totcount == 0)
-                    projlist[i].Status = ProjectStatus.Safe;
-                else
+                if(totcount > 0)
                 {
                     int total = (projlev / totcount);
                     status = total >= PROJECT_ALERT_LEVEL ? ProjectStatus.Alert : (total >= PROJECT_WARNING_LEVEL ? ProjectStatus.Warning : ProjectStatus.Safe);
@@ -238,6 +269,11 @@ namespace Civionics
                 System.Diagnostics.Debug.WriteLine("Finished computing statuses.\n");
         }
 
+        /// <summary>
+        /// Removes all readings from the database that are older
+        /// than a certain date.
+        /// </summary>
+        /// <param name="length">The number of days before today to remove</param>
         static void purge(int length = PURGE_OFFSET)
         {
             DateTimeOffset dt = DateTimeOffset.Now.AddDays(-1 * length);
