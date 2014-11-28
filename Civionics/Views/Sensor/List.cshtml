@@ -10,7 +10,7 @@
 @if (User.IsInRole("admin"))
 {
     <p>
-        @Html.ActionLink("Add New", "Create", new {id = ViewBag.projectid}, new {@class = "btn btn-default"})
+        @Html.ActionLink("Add New", "Create", new { id = ViewBag.projectid }, new { title = "Add a new sensor to this project", @class = "btn btn-default" })
     </p>
 }
 
@@ -44,10 +44,10 @@
                 @Html.DisplayFor(modelItem => item.serial)
             </td>
             <td>
-                @Html.ActionLink("Table", "../Reading/Table/" + item.ID + "/" + 35, null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Table", "../Reading/Table/" + item.ID + "/" + 35, null, new { title = "See this sensor's data in table form", @class = "btn btn-default" })
             </td>
             <td>
-                @Html.ActionLink("Chart", "../Reading/ChartDisplay/" + item.ID, null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Chart", "../Reading/ChartDisplay/" + item.ID, null, new { title = "See this sensor's data in graph form", @class = "btn btn-default" })
             </td>
             <td>
                 @if (item.Status == Civionics.Models.SensorStatus.Alert)
@@ -73,9 +73,9 @@
             <td>
                 @if (User.Identity.Name == "admin")
                 {
-                    @Html.ActionLink("Settings", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Settings", "Edit", new { id = item.ID }, new { title = "Change settings for this sensor", @class = "btn btn-default" })
                     
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { title = "Delete this sensor from the project", @class = "btn btn-default" })
                 }
             </td>
         </tr>

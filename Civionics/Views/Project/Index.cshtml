@@ -9,7 +9,7 @@
 
 @if (User.IsInRole("admin"))
 {
-    @Html.ActionLink("New Project", "Create", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("New Project", "Create", null, new { title = "Add a new project to the server", @class = "btn btn-default" })
 }
 <br />
 <br />
@@ -32,7 +32,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.Name, "../Sensor/List", new { id = item.ID }, new { @class = "btn btn-civ" })
+                @Html.ActionLink(item.Name, "../Sensor/List", new { id = item.ID }, new { title = "See sensors for this project", @class = "btn btn-civ" })
             </td>
             <td>
                 @if (item.Status == Civionics.Models.ProjectStatus.Alert)
@@ -55,14 +55,14 @@
             <td>
                 @if (User.IsInRole("admin"))
                 {
-                    @Html.ActionLink("Edit Permissions", "Edit", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Edit Permissions", "Edit", new { id = item.ID }, new { title = "Edit who can access this project", @class = "btn btn-default" })
                 }
 
                 @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-default" })
 
                 @if (User.IsInRole("admin"))
                 {
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { title = "Delete this project from the server", @class = "btn btn-default" })
                 }
             </td>
         </tr>

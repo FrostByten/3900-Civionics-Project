@@ -17,7 +17,7 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Project.Name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Project.Name, new { title = "Project this sensor belongs to", @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.Project.Name)
                 @Html.HiddenFor(model => model.ProjectID)
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.serial, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.serial, new { title = "Serial number unique to this sensor", @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.serial)
                 @Html.HiddenFor(model => model.serial)
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SiteID, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.SiteID, new { title = "Physical location of the sensor", @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.SiteID)
                 @Html.HiddenFor(model => model.SiteID)
@@ -81,7 +81,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AutoRange, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AutoRange, new { title = "Toggle method of determining safe values for readings;" + 
+                                                                   " Auto-Range on to use Auto Percent;" +
+                                                                   " Auto-Range off to use Minimum/Maximum Safe Reading",
+                                                           @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AutoRange)
                 @Html.ValidationMessageFor(model => model.AutoRange)
@@ -89,7 +92,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AutoPercent, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AutoPercent, new { title = "Range of safe readings in % variance from mean data value", @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AutoPercent)
                 @Html.ValidationMessageFor(model => model.AutoPercent)
@@ -99,7 +102,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
-                @Html.ActionLink("Back to List", "List/" + (string)ViewBag.projectid, null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Back to List", "List/" + (string)ViewBag.projectid, null, new { title = "Back to list of sensors", @class = "btn btn-default" })
             </div>
         </div>
     </div>

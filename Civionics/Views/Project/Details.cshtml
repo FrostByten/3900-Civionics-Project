@@ -48,7 +48,7 @@
 <p>
     @if (User.Identity.Name == "admin")
     {
-        @Html.ActionLink("Edit Permissions", "Edit", new { id = Model.ID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Edit Permissions", "Edit", new { id = Model.ID }, new { title = "Edit who can access this project", @class = "btn btn-default" })
     }
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Back to List", "Index", null, new { title = "Back to list of projects", @class = "btn btn-default" })
 </p>
